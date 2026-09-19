@@ -1,0 +1,10 @@
+{
+  "name":"SmartField 360",
+  "short_name":"SmartField360",
+  "start_url":"./index.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#15171b",
+  "theme_color":"#15171b",
+  "icons":[{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
