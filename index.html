@@ -286,4 +286,186 @@ const oldGo=go;go=function(id){oldGo(id);pageTitle.textContent=I18N[currentLang]
 applyLang(currentLang);
 
 </script>
+
+<script id="sf360-full-i18n">
+(function(){
+  const requested = localStorage.getItem("sf360-lang") || "en";
+  try { if (typeof window.applyLang === "function") window.applyLang("en"); } catch(e) {}
+
+  const AR = new Map([
+    ["SmartField 360™ | Oilfield Operations Platform","SmartField 360™ | منصة عمليات الحقل النفطي"],
+    ["Oilfield Integrated Operations Platform","منصة متكاملة لعمليات الحقل النفطي"],
+    ["Username","اسم المستخدم"],["Password","كلمة المرور"],["Role","الدور"],["Executive","تنفيذي"],
+    ["Operations","العمليات"],["Maintenance","الصيانة"],["HSE","السلامة والصحة والبيئة"],["Sign In","تسجيل الدخول"],
+    ["Demo users:","مستخدمو العرض:"],["Smart Innovation for Engineering & IT","الابتكار الذكي للهندسة وتقنية المعلومات"],
+    ["Command Center","مركز القيادة"],["Executive Overview","النظرة التنفيذية"],["Production & Wells","الإنتاج والآبار"],
+    ["Facilities & SCADA","المرافق وSCADA"],["Asset & Maintenance","الأصول والصيانة"],["Well Intervention","تدخلات الآبار"],
+    ["HSE & Permit to Work","السلامة والصحة والبيئة وتصاريح العمل"],["Materials & Procurement","المواد والمشتريات"],
+    ["Contracts & Contractors","العقود والمقاولون"],["Management","الإدارة"],["Cost Control","التحكم بالكلف"],
+    ["Reports & Analytics","التقارير والتحليلات"],["SAP / OT Integration","تكامل SAP / OT"],["Confidential Client Demo","عرض سري مخصص للعميل"],
+    ["● Platform Online","● النظام متصل"],["Guest","زائر"],["Logout","تسجيل الخروج"],
+    ["Oilfield Integrated Operations Command Center","مركز القيادة المتكامل لعمليات الحقل النفطي"],
+    ["Unified operational visibility across wells, production, facilities, maintenance, HSE, materials, contractors and cost performance — designed to integrate with the client's existing SAP and OT/SCADA environment.","رؤية تشغيلية موحدة للآبار والإنتاج والمرافق والصيانة والسلامة والمواد والمقاولين وأداء الكلف — مصممة للتكامل مع بيئة SAP وOT/SCADA الحالية لدى العميل."],
+    ["ON-PREMISE • SAP-READY • SCADA-READY • API-DRIVEN","داخل موقع العميل • جاهز لـ SAP • جاهز لـ SCADA • يعتمد على API"],
+    ["Production Performance by Well","أداء الإنتاج حسب البئر"],["Operations Action Center","مركز الإجراءات التشغيلية"],
+    ["Production Attainment","تحقيق هدف الإنتاج"],["Maintenance Health","حالة الصيانة"],["HSE Snapshot","ملخص السلامة"],
+    ["Production & Well Operations","الإنتاج وعمليات الآبار"],
+    ["Well status, production targets, water cut, pressure, downtime and intervention visibility from one operational view.","حالة الآبار وأهداف الإنتاج ونسبة الماء والضغط ووقت التوقف والتدخلات ضمن شاشة تشغيلية موحدة."],
+    ["DAILY PRODUCTION REPORTING","تقارير الإنتاج اليومية"],["Digital Oilfield Map","الخريطة الرقمية للحقل النفطي"],
+    ["Click a well marker to open the detailed well card.","اضغط على علامة البئر لفتح البطاقة التفصيلية للبئر."],
+    ["Field KPIs","مؤشرات أداء الحقل"],["Production Loss Drivers","أسباب خسارة الإنتاج"],["Well Production Register","سجل إنتاج الآبار"],
+    ["Facilities & SCADA Operations","عمليات المرافق وSCADA"],
+    ["Operational status of CPF, compression, tank farm and utilities with alarm/event visibility. Real deployment would ingest authorized data through the industrial DMZ/historian layer.","الحالة التشغيلية لمنشأة المعالجة المركزية والضغط ومنطقة الخزانات والخدمات مع عرض الإنذارات والأحداث. في النشر الفعلي تُستقبل البيانات المصرح بها عبر طبقة DMZ الصناعية والمؤرشف."],
+    ["OT VISIBILITY WITHOUT DIRECT ERP-TO-PLC CONNECTION","رؤية OT دون اتصال مباشر بين ERP وPLC"],
+    ["Facility Status","حالة المرافق"],["SCADA Alarm Console","وحدة إنذارات SCADA"],["Process Overview","نظرة عامة على العملية"],
+    ["Wells","الآبار"],["8 monitored wells","8 آبار تحت المراقبة"],["Gathering","التجميع"],["Flowlines / manifolds","خطوط الجريان / المجمعات"],
+    ["CPF","منشأة المعالجة المركزية"],["Separation & treatment","الفصل والمعالجة"],["Storage","الخزن"],["Tank farm","منطقة الخزانات"],
+    ["Export","التصدير"],["Metering / dispatch","القياس / الإرسال"],["Asset Integrity & Maintenance","سلامة الأصول والصيانة"],
+    ["Asset hierarchy, criticality, preventive maintenance and corrective work orders aligned with SAP EAM / PM integration patterns.","هيكل الأصول ودرجة الأهمية والصيانة الوقائية وأوامر العمل التصحيحية بما يتوافق مع أنماط تكامل SAP EAM / PM."],
+    ["ASSET-CENTRIC MAINTENANCE","صيانة تتمحور حول الأصول"],["Critical Asset Register","سجل الأصول الحرجة"],
+    ["Maintenance Backlog by Priority","تراكم أعمال الصيانة حسب الأولوية"],["Open Work Orders","أوامر العمل المفتوحة"],
+    ["Well Intervention & Production Recovery","تدخلات الآبار واستعادة الإنتاج"],
+    ["Prioritize interventions using production loss, downtime, well criticality, work scope and expected production recovery.","ترتيب أولويات التدخلات اعتمادًا على خسارة الإنتاج ووقت التوقف وأهمية البئر ونطاق العمل والإنتاج المتوقع استعادته."],
+    ["PRODUCTION RECOVERY PLANNING","تخطيط استعادة الإنتاج"],["Intervention Candidate Ranking","ترتيب مرشحي التدخل"],
+    ["Recovery Opportunity","فرصة استعادة الإنتاج"],["Planned Intervention Workflow","مسار التدخل المخطط"],["Identify Loss","تحديد الخسارة"],
+    ["Downtime / underperformance","التوقف / انخفاض الأداء"],["Technical Review","المراجعة الفنية"],["Operations + subsurface + maintenance","العمليات + المكامن + الصيانة"],
+    ["Approval","الموافقة"],["Scope / budget / HSE","النطاق / الميزانية / السلامة"],["Execute","التنفيذ"],
+    ["Intervention / repair","التدخل / الإصلاح"],["Verify Gain","التحقق من الزيادة"],["Production recovery","استعادة الإنتاج"],
+    ["Track incidents, near misses, inspections, corrective actions and permits to work with accountable owners and approval status.","متابعة الحوادث وشبه الحوادث وعمليات التفتيش والإجراءات التصحيحية وتصاريح العمل مع تحديد المسؤول وحالة الموافقة."],
+    ["HSE GOVERNANCE & TRACEABILITY","حوكمة السلامة وقابلية التتبع"],["HSE Register","سجل السلامة"],
+    ["Active Permits to Work","تصاريح العمل الفعالة"],["Materials, Warehouse & Procurement","المواد والمخازن والمشتريات"],
+    ["Critical spares, reorder points and procurement workflow from operational demand through PR/RFQ/PO — ready for SAP MM integration.","قطع الغيار الحرجة ونقاط إعادة الطلب ومسار المشتريات من الحاجة التشغيلية مرورًا بـ PR/RFQ/PO — جاهز للتكامل مع SAP MM."],
+    ["MATERIAL AVAILABILITY & PROCUREMENT CONTROL","توفر المواد والتحكم بالمشتريات"],["Critical Spare Parts","قطع الغيار الحرجة"],
+    ["Procurement Pipeline","مسار المشتريات"],["Contracts & Contractor Performance","العقود وأداء المقاولين"],
+    ["Contract value, progress, expiry, SLA and operational contractor performance visibility.","متابعة قيمة العقد ونسبة الإنجاز وتاريخ الانتهاء وSLA وأداء المقاول التشغيلي."],
+    ["CONTRACT GOVERNANCE","حوكمة العقود"],["OPEX / CAPEX Cost Control","التحكم بكلف OPEX / CAPEX"],
+    ["Budget, actual expenditure, cost centers and variance analysis to connect field operations with enterprise financial control.","الميزانية والإنفاق الفعلي ومراكز الكلفة وتحليل الانحراف لربط عمليات الحقل بالرقابة المالية المؤسسية."],
+    ["COST VISIBILITY BY OPERATIONAL AREA","رؤية الكلف حسب المنطقة التشغيلية"],["Budget vs Actual","الميزانية مقابل الفعلي"],
+    ["Cost Utilization","استخدام الميزانية"],["Reports & Management Analytics","التقارير والتحليلات الإدارية"],
+    ["Board-ready operational reports and drill-down analysis. Production implementation can generate scheduled PDF/Excel reports and integrate with the client's BI platform.","تقارير تشغيلية جاهزة للإدارة وتحليل تفصيلي. يمكن للنسخة الإنتاجية إنشاء تقارير PDF/Excel مجدولة والتكامل مع منصة BI لدى العميل."],
+    ["EXECUTIVE & OPERATIONAL REPORTING","التقارير التنفيذية والتشغيلية"],["SAP / OT Integration Architecture","معمارية تكامل SAP / OT"],
+    ["SmartField 360 is positioned as the oilfield operational experience layer. Existing SAP remains the enterprise system of record while OT data is accessed through controlled industrial integration points.","يعمل SmartField 360 كطبقة تشغيلية للحقل النفطي، بينما يبقى SAP الحالي نظام السجل المؤسسي ويتم الوصول إلى بيانات OT عبر نقاط تكامل صناعية مضبوطة."],
+    ["SECURE BY DESIGN","الأمن مدمج في التصميم"],["Field / OT","الحقل / OT"],["PLCs, RTUs, sensors, meters","PLCs وRTUs والحساسات والعدادات"],
+    ["SCADA / Historian","SCADA / المؤرشف"],["Operational source","المصدر التشغيلي"],["Industrial DMZ","المنطقة الصناعية العازلة DMZ"],
+    ["Gateway / API / broker","بوابة / API / وسيط"],["Workflows & dashboards","مسارات العمل ولوحات المتابعة"],["Enterprise Integration Scope","نطاق التكامل المؤسسي"],
+    ["Cybersecurity Controls","ضوابط الأمن السيبراني"],["Identity & Access","الهوية والوصول"],
+    ["AD/LDAP/SSO, MFA, least privilege and role-based access.","AD/LDAP/SSO وMFA وأقل صلاحية والوصول حسب الدور."],
+    ["IT/OT Segmentation","فصل شبكات IT/OT"],["No direct SAP-to-PLC connectivity; controlled data exchange through DMZ services.","لا يوجد ربط مباشر بين SAP وPLC؛ يتم تبادل البيانات بصورة مضبوطة عبر خدمات DMZ."],
+    ["Auditability","قابلية التدقيق"],["Centralized logs, approval history and traceable user actions.","سجلات مركزية وسجل موافقات وتتبع كامل لإجراءات المستخدمين."],
+    ["Deployment","النشر"],["On-premise deployment supported for sensitive field environments.","يدعم النشر داخل موقع العميل للبيئات النفطية الحساسة."],
+    ["Well","البئر"],["Status","الحالة"],["Oil BBL/d","النفط برميل/يوم"],["Target","الهدف"],["Gas MMSCF/d","الغاز MMSCF/يوم"],
+    ["Water Cut %","نسبة الماء %"],["Pressure PSI","الضغط PSI"],["Uptime %","وقت التشغيل %"],["Name","الاسم"],["Zone","المنطقة"],
+    ["Oil","النفط"],["Gas","الغاز"],["Water %","الماء %"],["Facility","المرفق"],["Availability %","التوفر %"],
+    ["Throughput / Load","الإنتاجية / الحمل"],["Current Alarm","الإنذار الحالي"],["Asset","الأصل"],["Category","الفئة"],
+    ["Criticality","الأهمية"],["Location","الموقع"],["Next PM","الصيانة القادمة"],["Work Order","أمر العمل"],["Type","النوع"],
+    ["Priority","الأولوية"],["Due","الاستحقاق"],["Owner","المسؤول"],["Cost USD","الكلفة بالدولار"],["Reference","المرجع"],
+    ["Severity","الخطورة"],["Date","التاريخ"],["Area","المنطقة"],["Action Owner","مسؤول الإجراء"],["Permit","التصريح"],["Job","العمل"],
+    ["Expiry","الانتهاء"],["SKU","رمز المادة"],["Item","المادة"],["Qty","الكمية"],["Min","الحد الأدنى"],["Unit","الوحدة"],
+    ["Stock Value","قيمة المخزون"],["PR","طلب الشراء"],["Description","الوصف"],["Requester","الطالب"],["Amount USD","المبلغ بالدولار"],
+    ["Stage","المرحلة"],["Vendor","المورد"],["Contract","العقد"],["Contractor","المقاول"],["Scope","النطاق"],["Value USD","القيمة بالدولار"],
+    ["Progress %","التقدم %"],["SLA %","SLA %"],["Budget USD","الميزانية بالدولار"],["Actual USD","الفعلي بالدولار"],
+    ["Cost Center","مركز الكلفة"],["System","النظام"],["Data Domain","مجال البيانات"],["Integration Pattern","نمط التكامل"],["Business Owner","الجهة المسؤولة"],
+    ["Producing","منتج"],["Down","متوقف"],["Shut-in","مغلق"],["Running","يعمل"],["Warning","تحذير"],["Critical","حرج"],
+    ["Open","مفتوح"],["Planned","مخطط"],["Approved","موافق عليه"],["Pending","قيد الانتظار"],["Closed","مغلق"],["Active","فعال"],
+    ["High","عالٍ"],["Medium","متوسط"],["Low","منخفض"],["Corrective","تصحيحية"],["Preventive","وقائية"],["Inspection","فحص"],
+    ["In Progress","قيد التنفيذ"],["RFQ","طلب عروض"],["PO Issued","تم إصدار أمر الشراء"],["Near Miss","شبه حادث"],["Inspection Finding","ملاحظة تفتيش"],
+    ["Hot Work","أعمال ساخنة"],["Electrical","كهربائية"],["Confined Space","حيز مغلق"],["Main Transfer Pump","مضخة النقل الرئيسية"],
+    ["Gas Compressor 04","ضاغط الغاز 04"],["Crude Storage Tank 11","خزان النفط الخام 11"],["Emergency Generator 07","مولد الطوارئ 07"],
+    ["Pump","مضخة"],["Compressor","ضاغط"],["Tank","خزان"],["Generator","مولد"],["Central Processing Facility","منشأة المعالجة المركزية"],
+    ["Gas Compression Station","محطة ضغط الغاز"],["Tank Farm","منطقة الخزانات"],["Utilities / Power","الخدمات / الطاقة"],
+    ["ESP Trip","توقف مضخة ESP"],["Planned Maintenance","صيانة مخططة"],["Shut-in Review","مراجعة بئر مغلق"],
+    ["ESP recovery/replacement","استعادة/استبدال مضخة ESP"],["complete maintenance & restart","إكمال الصيانة وإعادة التشغيل"],
+    ["integrity/restart assessment","تقييم السلامة وإعادة التشغيل"],["Ready for Review","جاهز للمراجعة"],["Engineering Review","مراجعة هندسية"],
+    ["Current operational state","الحالة التشغيلية الحالية"],["Detailed well card — demonstration data","بطاقة تفصيلية للبئر — بيانات تجريبية"],
+    ["Well Performance","أداء البئر"],["Target attainment","تحقيق الهدف"],["Uptime","وقت التشغيل"],["Water cut:","نسبة الماء:"],
+    ["Downtime:","وقت التوقف:"],["Last maintenance:","آخر صيانة:"],["Next PM:","الصيانة الوقائية القادمة:"],
+    ["Recoverable Production","الإنتاج القابل للاستعادة"],["Highest Priority","أعلى أولوية"],["Open Candidates","الحالات المفتوحة"],
+    ["Potential Uplift","الزيادة المحتملة"],["Daily Production Report","تقرير الإنتاج اليومي"],["Executive Field Report","التقرير التنفيذي للحقل"],
+    ["Maintenance KPI Report","تقرير مؤشرات الصيانة"],["HSE & PTW Report","تقرير السلامة وتصاريح العمل"],
+    ["Inventory Criticality Report","تقرير حرجية المخزون"],["Cost & Procurement Report","تقرير الكلف والمشتريات"],["Preview","معاينة"],
+    ["Field availability","توفر الحقل"],["BBL/day","برميل/يوم"],["Hours","ساعة"],["Current month","الشهر الحالي"],
+    ["Open Findings","الملاحظات المفتوحة"],["Active PTWs","تصاريح العمل الفعالة"],["Total Budget","إجمالي الميزانية"],
+    ["Actual Spend","الإنفاق الفعلي"],["Variance","الانحراف"],["Utilization","نسبة الاستخدام"],["PM Compliance","الالتزام بالصيانة الوقائية"],
+    ["Critical Assets","الأصول الحرجة"],["Maintenance Spend","إنفاق الصيانة"],["Days Without LTI","أيام بدون إصابة مضيعة للوقت"],
+    ["Active Contracts","العقود الفعالة"],["Contract Value","قيمة العقود"],["Avg SLA","متوسط SLA"],["Nearest Expiry","أقرب انتهاء"]
+  ]);
+
+  const originalText = new WeakMap();
+  const originalPlaceholder = new WeakMap();
+  let activeLang = "en";
+  let busy = false;
+
+  function rememberAndTranslateText(node, lang){
+    if(!originalText.has(node)) originalText.set(node,node.nodeValue);
+    const base = originalText.get(node);
+    if(lang==="en"){ if(node.nodeValue!==base) node.nodeValue=base; return; }
+    const lead=(base.match(/^\s*/)||[""])[0], trail=(base.match(/\s*$/)||[""])[0], core=base.trim();
+    if(!core) return;
+    let translated=AR.get(core);
+    if(!translated){
+      translated=core;
+      const entries=[...AR.entries()].sort((a,b)=>b[0].length-a[0].length);
+      for(const [en,ar] of entries){
+        if(translated.includes(en)) translated=translated.split(en).join(ar);
+      }
+    }
+    const out=lead+translated+trail;
+    if(node.nodeValue!==out) node.nodeValue=out;
+  }
+
+  function translateTree(root,lang){
+    if(!root) return;
+    busy=true;
+    try{
+      const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+        acceptNode(n){
+          const p=n.parentElement;
+          if(!p || ["SCRIPT","STYLE","NOSCRIPT"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      let n; const nodes=[]; while(n=walker.nextNode()) nodes.push(n);
+      nodes.forEach(x=>rememberAndTranslateText(x,lang));
+      root.querySelectorAll?.("input[placeholder],textarea[placeholder]").forEach(el=>{
+        if(!originalPlaceholder.has(el)) originalPlaceholder.set(el,el.getAttribute("placeholder")||"");
+        const base=originalPlaceholder.get(el);
+        el.setAttribute("placeholder",lang==="ar"?(AR.get(base)||base):base);
+      });
+    } finally { busy=false; }
+  }
+
+  function fullApply(lang){
+    activeLang=lang;
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+    translateTree(document.body,lang);
+    try{
+      if(window.enBtn) enBtn.classList.toggle("active",lang==="en");
+      if(window.arBtn) arBtn.classList.toggle("active",lang==="ar");
+    }catch(e){}
+    localStorage.setItem("sf360-lang",lang);
+  }
+
+  const oldApply = window.applyLang;
+  window.applyLang = function(lang){
+    try { if(typeof oldApply==="function") oldApply(lang); } catch(e){}
+    fullApply(lang);
+  };
+
+  const observer=new MutationObserver(muts=>{
+    if(busy) return;
+    for(const m of muts){
+      for(const n of m.addedNodes){
+        if(n.nodeType===Node.TEXT_NODE) rememberAndTranslateText(n,activeLang);
+        else if(n.nodeType===Node.ELEMENT_NODE) translateTree(n,activeLang);
+      }
+    }
+  });
+  observer.observe(document.body,{subtree:true,childList:true});
+
+  if(window.enBtn) enBtn.onclick=()=>window.applyLang("en");
+  if(window.arBtn) arBtn.onclick=()=>window.applyLang("ar");
+  window.applyLang(requested);
+})();
+</script>
 </body></html>
