@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111318">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<script src="client-config.js"></script>
+<title>SmartField 360™ | Oilfield Operations Platform</title>
+<style>
+:root{--red:#d71920;--red2:#b31319;--ink:#15171b;--muted:#69707d;--bg:#f3f5f7;--card:#fff;--line:#e5e7eb;--green:#167c46;--amber:#b86a08;--blue:#155eef;--nav:#111318}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button{font:inherit}.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{background:var(--nav);color:#fff;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;gap:10px;align-items:center;padding:4px 6px 18px;border-bottom:1px solid #2a2e36}.brand img{width:46px;height:46px;border-radius:10px}.brand b{font-size:16px}.brand small{display:block;color:#9ca3af;font-size:10px;margin-top:3px}.side h6{margin:18px 8px 7px;color:#737b88;font-size:9px;letter-spacing:1px;text-transform:uppercase}.side button{width:100%;border:0;background:transparent;color:#c9ced6;padding:10px 11px;border-radius:8px;text-align:left;font-size:12px;margin:2px 0;cursor:pointer}.side button.active,.side button:hover{background:#242831;color:#fff}.side button.active{box-shadow:inset 3px 0 0 var(--red)}
+.main{min-width:0}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:6}.top h1{font-size:17px;margin:0}.topRight{display:flex;gap:10px;align-items:center}.badge{font-size:10px;border-radius:20px;padding:6px 9px;background:#f7f7f8;border:1px solid var(--line)}.online{color:var(--green);background:#effaf4}.demo{color:#92400e;background:#fff8e8}.avatar{width:31px;height:31px;border-radius:50%;background:#20242b;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px}.langSwitch{display:flex;border:1px solid #cfd4da;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px #0001}.langSwitch button{border:0;background:#fff;padding:8px 11px;font-size:11px;font-weight:700;cursor:pointer;min-width:46px}.langSwitch button.active{background:#17191d;color:#fff}html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .side button,html[dir="rtl"] th,html[dir="rtl"] td{text-align:right}html[dir="rtl"] .side button.active{box-shadow:inset -3px 0 0 var(--red)}
+.content{padding:22px}.section{display:none}.section.active{display:block}.hero{background:linear-gradient(115deg,#14161b,#2a2e35);border-radius:16px;color:#fff;padding:22px 24px;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:16px}.hero h2{margin:0 0 6px;font-size:22px}.hero p{margin:0;color:#c7ccd4;font-size:12px;max-width:780px;line-height:1.5}.heroTag{font-size:10px;border:1px solid #515761;border-radius:9px;padding:8px 10px;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px}.k{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}.v{font-size:25px;font-weight:750;margin:7px 0}.sub{font-size:10px;color:var(--muted)}.deltaUp{color:var(--green)}.deltaDown{color:#b42318}
+.grid2{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;margin-top:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;overflow:auto}.panel h3{font-size:13px;margin:0 0 12px}.panel h4{font-size:11px;margin:14px 0 7px;color:#444}
+table{width:100%;border-collapse:collapse;font-size:11px;min-width:620px}th,td{padding:9px;border-bottom:1px solid #edf0f2;text-align:left;white-space:nowrap}th{font-size:9px;text-transform:uppercase;color:#747b86;font-weight:650;background:#fafbfc}.status{font-size:9px;padding:4px 7px;border-radius:9px;background:#eef0f2}.Producing,.Running,.Approved,.Closed,.Active{background:#eaf8ef;color:#126c3d}.Down,.Critical,.Overdue,.Rejected{background:#fdecec;color:#a7191f}.Maintenance,.Pending,.Warning,.In-Progress{background:#fff2d9;color:#9a5700}.Shut-in,.Planned{background:#eef0f2;color:#4b5563}
+.map{height:360px;border-radius:12px;background:linear-gradient(145deg,#eef1f4,#fafbfc);position:relative;overflow:hidden}.map:before,.map:after{content:"";position:absolute;inset:0;background:linear-gradient(28deg,transparent 48%,#dfe4e8 49%,#dfe4e8 50%,transparent 51%),linear-gradient(145deg,transparent 48%,#e4e8ec 49%,#e4e8ec 50%,transparent 51%);opacity:.55}.zone{position:absolute;font-size:9px;color:#7a818d;text-transform:uppercase;letter-spacing:1px;z-index:1}.well{position:absolute;width:22px;height:22px;border-radius:50%;border:4px solid #fff;box-shadow:0 1px 6px #0004;z-index:2;cursor:pointer}.prod{background:#1a9b57}.down{background:#df2d32}.maint{background:#d88412}.shut{background:#4b5563}.facility{position:absolute;background:#111318;color:#fff;border-radius:7px;padding:6px 8px;font-size:9px;z-index:2;box-shadow:0 2px 8px #0003}
+.metricRow{display:flex;align-items:center;gap:9px;margin:10px 0}.metricRow label{font-size:10px;width:120px}.bar{height:8px;background:#eef0f2;border-radius:8px;overflow:hidden;flex:1}.bar i{display:block;height:100%;background:var(--red)}.bar.green i{background:var(--green)}.bar.amber i{background:var(--amber)}
+.alarm{border-left:3px solid #ccc;padding:9px 10px;background:#fafbfc;border-radius:7px;margin:8px 0}.alarm.critical{border-color:#d71920}.alarm.warning{border-color:#d88412}.alarm.info{border-color:#155eef}.alarm b{font-size:11px}.alarm p{margin:3px 0 0;font-size:10px;color:var(--muted)}
+.chip{font-size:9px;border-radius:8px;padding:4px 6px;background:#f0f2f4}.flow{display:flex;align-items:stretch;gap:8px;overflow:auto}.flowCard{min-width:145px;background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}.flowArrow{align-self:center;color:#9ca3af}.money{font-variant-numeric:tabular-nums}.btn{border:0;border-radius:8px;padding:8px 10px;font-size:10px;cursor:pointer}.btn.red{background:var(--red);color:white}.btn.dark{background:#1b1e24;color:#fff}.btn.soft{background:#f0f2f4}.actionRow{display:flex;gap:7px;flex-wrap:wrap}
+.reportCard{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.reportCard b{font-size:12px}.reportCard p{font-size:10px;color:var(--muted);line-height:1.4}.reportCard button{margin-top:5px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;padding:20px;align-items:center;justify-content:center}.modal.show{display:flex}.modalbox{width:min(820px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:15px;padding:20px}.close{float:right;font-size:22px;cursor:pointer}.small{font-size:10px;color:var(--muted)}
+.mobileNav{display:none}.loginGate{position:fixed;inset:0;background:linear-gradient(135deg,#0f1115,#292d35);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}.loginCard{width:min(430px,94vw);background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px #0007}.loginBrand{display:flex;gap:12px;align-items:center;margin-bottom:18px}.loginBrand img{width:54px;height:54px;border-radius:12px}.loginCard h2{margin:0;font-size:20px}.loginCard p{font-size:11px;color:var(--muted);line-height:1.5}.field{margin:10px 0}.field label{display:block;font-size:10px;color:#555;margin-bottom:5px}.field input,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:#fff}.loginError{font-size:10px;color:#b42318;min-height:14px;margin-top:6px}.userChip{font-size:10px;padding:6px 9px;border-radius:9px;background:#f3f4f6;border:1px solid var(--line)}.topAction{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px;font-size:10px;cursor:pointer}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}.top{top:0}.content{padding:12px 12px 75px}.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.heroTag{white-space:normal}.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#111318;z-index:20;padding:7px;gap:6px;overflow:auto}.mobileNav button{min-width:70px;border:0;background:transparent;color:#c8cdd4;font-size:9px;padding:8px 5px;border-radius:8px}.mobileNav button.active{background:#2a2e35;color:#fff}}
+</style>
+</head>
+<body>
+<div class="loginGate" id="loginGate">
+  <div class="loginCard">
+    <div class="loginBrand"><img src="icons/icon.svg"><div><h2>SmartField 360™</h2><p>Oilfield Integrated Operations Platform</p></div></div>
+    <div class="field"><label>Username</label><input id="loginUser" placeholder="admin / manager / engineer"></div>
+    <div class="field"><label>Password</label><input id="loginPass" type="password" placeholder="Password"></div>
+    <div class="field"><label>Role</label><select id="loginRole"><option>Executive</option><option>Operations</option><option>Maintenance</option><option>HSE</option></select></div>
+    <button class="btn red" id="loginBtn" style="width:100%;padding:11px">Sign In</button>
+    <div class="loginError" id="loginError"></div>
+    <p><b>Demo users:</b> admin / SmartField360! &nbsp; • &nbsp; manager / Field360! &nbsp; • &nbsp; engineer / Engineer360!</p>
+  </div>
+</div>
+<div class="shell">
+<aside class="side">
+<div class="brand"><img src="icons/icon.svg"><div><b>SmartField 360™</b><small>Smart Innovation for Engineering & IT</small></div></div>
+<h6>Command Center</h6>
+<button data-sec="executive" class="active">▦ <span data-i18n="nav.executive">Executive Overview</span></button>
+<button data-sec="production">◉ <span data-i18n="nav.production">Production & Wells</span></button>
+<button data-sec="facilities">▣ <span data-i18n="nav.facilities">Facilities & SCADA</span></button>
+<h6>Operations</h6>
+<button data-sec="maintenance">⚙ <span data-i18n="nav.maintenance">Asset & Maintenance</span></button>
+<button data-sec="intervention">↗ <span data-i18n="nav.intervention">Well Intervention</span></button>
+<button data-sec="hse">◇ <span data-i18n="nav.hse">HSE & Permit to Work</span></button>
+<button data-sec="materials">▤ <span data-i18n="nav.materials">Materials & Procurement</span></button>
+<button data-sec="contracts">⌘ <span data-i18n="nav.contracts">Contracts & Contractors</span></button>
+<h6>Management</h6>
+<button data-sec="finance">$ <span data-i18n="nav.finance">Cost Control</span></button>
+<button data-sec="reports">▥ <span data-i18n="nav.reports">Reports & Analytics</span></button>
+<button data-sec="integration">⇄ <span data-i18n="nav.integration">SAP / OT Integration</span></button>
+</aside>
+<div class="main">
+<header class="top"><h1 id="pageTitle">Executive Overview</h1><div class="topRight"><button class="topAction" id="excelBtn">Excel</button><button class="topAction" id="pdfBtn">PDF</button><div class="langSwitch"><a href="index.html" class="active" style="text-decoration:none;padding:8px 11px;font-size:11px;font-weight:700;color:#fff;background:#17191d">EN</a><a href="ar.html" style="text-decoration:none;padding:8px 11px;font-size:11px;font-weight:700;color:#17191d;background:#fff">عربي</a></div><span class="badge demo" id="clientBadge">Confidential Client Demo</span><span class="badge online">● Platform Online</span><span class="userChip" id="userChip">Guest</span><button class="topAction" id="logoutBtn">Logout</button><div class="avatar">SI</div></div></header>
+<div class="content">
+<section id="executive" class="section active">
+<div class="hero"><div><h2 data-i18n="hero.exec">Oilfield Integrated Operations Command Center</h2><p>Unified operational visibility across wells, production, facilities, maintenance, HSE, materials, contractors and cost performance — designed to integrate with the client's existing SAP and OT/SCADA environment.</p></div><div class="heroTag">ON-PREMISE • SAP-READY • SCADA-READY • API-DRIVEN</div></div>
+<div class="kpis" id="execKpis"></div>
+<div class="grid2"><div class="panel"><h3>Production Performance by Well</h3><div id="execWellTable"></div></div><div class="panel"><h3>Operations Action Center</h3><div id="actionCenter"></div></div></div>
+<div class="grid3"><div class="panel"><h3>Production Attainment</h3><div id="attainment"></div></div><div class="panel"><h3>Maintenance Health</h3><div id="maintenanceHealth"></div></div><div class="panel"><h3>HSE Snapshot</h3><div id="hseSnapshot"></div></div></div>
+</section>
+<section id="production" class="section">
+<div class="hero"><div><h2 data-i18n="hero.production">Production & Well Operations</h2><p>Well status, production targets, water cut, pressure, downtime and intervention visibility from one operational view.</p></div><div class="heroTag">DAILY PRODUCTION REPORTING</div></div>
+<div class="grid2"><div class="panel"><h3>Digital Oilfield Map</h3><div class="map" id="fieldMap"></div><p class="small">Click a well marker to open the detailed well card.</p></div><div class="panel"><h3>Field KPIs</h3><div id="prodKpis"></div><h4>Production Loss Drivers</h4><div id="lossDrivers"></div></div></div>
+<div class="panel" style="margin-top:14px"><h3>Well Production Register</h3><div id="wellTable"></div></div>
+</section>
+<section id="facilities" class="section">
+<div class="hero"><div><h2 data-i18n="hero.facilities">Facilities & SCADA Operations</h2><p>Operational status of CPF, compression, tank farm and utilities with alarm/event visibility. Real deployment would ingest authorized data through the industrial DMZ/historian layer.</p></div><div class="heroTag">OT VISIBILITY WITHOUT DIRECT ERP-TO-PLC CONNECTION</div></div>
+<div class="kpis" id="facilityKpis"></div>
+<div class="grid2"><div class="panel"><h3>Facility Status</h3><div id="facilityTable"></div></div><div class="panel"><h3>SCADA Alarm Console</h3><div id="alarmList"></div></div></div>
+<div class="panel" style="margin-top:14px"><h3>Process Overview</h3><div class="flow"><div class="flowCard"><b>Wells</b><p class="small">8 monitored wells</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Gathering</b><p class="small">Flowlines / manifolds</p></div><div class="flowArrow">→</div><div class="flowCard"><b>CPF</b><p class="small">Separation & treatment</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Storage</b><p class="small">Tank farm</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Export</b><p class="small">Metering / dispatch</p></div></div></div>
+</section>
+<section id="maintenance" class="section">
+<div class="hero"><div><h2 data-i18n="hero.maintenance">Asset Integrity & Maintenance</h2><p>Asset hierarchy, criticality, preventive maintenance and corrective work orders aligned with SAP EAM / PM integration patterns.</p></div><div class="heroTag">ASSET-CENTRIC MAINTENANCE</div></div>
+<div class="kpis" id="maintKpis"></div>
+<div class="grid2"><div class="panel"><h3>Critical Asset Register</h3><div id="assetTable"></div></div><div class="panel"><h3>Maintenance Backlog by Priority</h3><div id="backlogBars"></div></div></div>
+<div class="panel" style="margin-top:14px"><h3>Open Work Orders</h3><div id="woTable"></div></div>
+</section>
+<section id="intervention" class="section"><div class="hero"><div><h2 data-i18n="hero.intervention">Well Intervention & Production Recovery</h2><p>Prioritize interventions using production loss, downtime, well criticality, work scope and expected production recovery.</p></div><div class="heroTag">PRODUCTION RECOVERY PLANNING</div></div><div class="kpis" id="interventionKpis"></div><div class="grid2"><div class="panel"><h3>Intervention Candidate Ranking</h3><div id="interventionTable"></div></div><div class="panel"><h3>Recovery Opportunity</h3><div id="recoveryBars"></div></div></div><div class="panel" style="margin-top:14px"><h3>Planned Intervention Workflow</h3><div class="flow"><div class="flowCard"><b>Identify Loss</b><p class="small">Downtime / underperformance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Technical Review</b><p class="small">Operations + subsurface + maintenance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Approval</b><p class="small">Scope / budget / HSE</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Execute</b><p class="small">Intervention / repair</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Verify Gain</b><p class="small">Production recovery</p></div></div></div></section>
+<section id="hse" class="section">
+<div class="hero"><div><h2 data-i18n="hero.hse">HSE & Permit to Work</h2><p>Track incidents, near misses, inspections, corrective actions and permits to work with accountable owners and approval status.</p></div><div class="heroTag">HSE GOVERNANCE & TRACEABILITY</div></div>
+<div class="kpis" id="hseKpis"></div>
+<div class="grid2"><div class="panel"><h3>HSE Register</h3><div id="hseTable"></div></div><div class="panel"><h3>Active Permits to Work</h3><div id="ptwTable"></div></div></div>
+</section>
+<section id="materials" class="section">
+<div class="hero"><div><h2 data-i18n="hero.materials">Materials, Warehouse & Procurement</h2><p>Critical spares, reorder points and procurement workflow from operational demand through PR/RFQ/PO — ready for SAP MM integration.</p></div><div class="heroTag">MATERIAL AVAILABILITY & PROCUREMENT CONTROL</div></div>
+<div class="grid2"><div class="panel"><h3>Critical Spare Parts</h3><div id="inventoryTable"></div></div><div class="panel"><h3>Procurement Pipeline</h3><div id="procurementTable"></div></div></div>
+</section>
+<section id="contracts" class="section">
+<div class="hero"><div><h2 data-i18n="hero.contracts">Contracts & Contractor Performance</h2><p>Contract value, progress, expiry, SLA and operational contractor performance visibility.</p></div><div class="heroTag">CONTRACT GOVERNANCE</div></div>
+<div class="kpis" id="contractKpis"></div><div class="panel" style="margin-top:14px"><div id="contractTable"></div></div>
+</section>
+<section id="finance" class="section">
+<div class="hero"><div><h2 data-i18n="hero.finance">OPEX / CAPEX Cost Control</h2><p>Budget, actual expenditure, cost centers and variance analysis to connect field operations with enterprise financial control.</p></div><div class="heroTag">COST VISIBILITY BY OPERATIONAL AREA</div></div>
+<div class="kpis" id="financeKpis"></div>
+<div class="grid2"><div class="panel"><h3>Budget vs Actual</h3><div id="financeTable"></div></div><div class="panel"><h3>Cost Utilization</h3><div id="financeBars"></div></div></div>
+</section>
+<section id="reports" class="section">
+<div class="hero"><div><h2 data-i18n="hero.reports">Reports & Management Analytics</h2><p>Board-ready operational reports and drill-down analysis. Production implementation can generate scheduled PDF/Excel reports and integrate with the client's BI platform.</p></div><div class="heroTag">EXECUTIVE & OPERATIONAL REPORTING</div></div>
+<div class="grid3" id="reportCards"></div>
+</section>
+<section id="integration" class="section">
+<div class="hero"><div><h2 data-i18n="hero.integration">SAP / OT Integration Architecture</h2><p>SmartField 360 is positioned as the oilfield operational experience layer. Existing SAP remains the enterprise system of record while OT data is accessed through controlled industrial integration points.</p></div><div class="heroTag">SECURE BY DESIGN</div></div>
+<div class="flow"><div class="flowCard"><b>Field / OT</b><p class="small">PLCs, RTUs, sensors, meters</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SCADA / Historian</b><p class="small">Operational source</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Industrial DMZ</b><p class="small">Gateway / API / broker</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SmartField 360</b><p class="small">Workflows & dashboards</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SAP / ERP</b><p class="small">EAM • MM • FI/CO</p></div></div>
+<div class="grid2"><div class="panel"><h3>Enterprise Integration Scope</h3><div id="integrationTable"></div></div><div class="panel"><h3>Cybersecurity Controls</h3><div class="alarm info"><b>Identity & Access</b><p>AD/LDAP/SSO, MFA, least privilege and role-based access.</p></div><div class="alarm info"><b>IT/OT Segmentation</b><p>No direct SAP-to-PLC connectivity; controlled data exchange through DMZ services.</p></div><div class="alarm info"><b>Auditability</b><p>Centralized logs, approval history and traceable user actions.</p></div><div class="alarm info"><b>Deployment</b><p>On-premise deployment supported for sensitive field environments.</p></div></div></div>
+</section>
+</div>
+</div>
+</div>
+<nav class="mobileNav" id="mobileNav"></nav>
+<div id="modal" class="modal"><div class="modalbox"><span class="close" onclick="modal.classList.remove('show')">×</span><div id="modalContent"></div></div></div>
+<script>
+const D={
+wells:[
+{code:"WF-001",name:"North-01",zone:"North",status:"Producing",oil:2340,target:2500,gas:1.8,water:12.4,pressure:1850,downtime:0,uptime:98.9,last:"03 Sep 2026",next:"03 Oct 2026"},
+{code:"WF-002",name:"North-02",zone:"North",status:"Producing",oil:2180,target:2200,gas:1.5,water:10.1,pressure:1770,downtime:0,uptime:99.2,last:"28 Aug 2026",next:"28 Sep 2026"},
+{code:"WF-003",name:"North-03",zone:"North",status:"Down",oil:0,target:1900,gas:0,water:18.2,pressure:0,downtime:14,uptime:76.3,last:"10 Sep 2026",next:"18 Sep 2026"},
+{code:"WF-004",name:"Central-01",zone:"Central",status:"Maintenance",oil:0,target:2100,gas:0,water:15.5,pressure:420,downtime:8,uptime:84.7,last:"18 Sep 2026",next:"18 Sep 2026"},
+{code:"WF-005",name:"Central-02",zone:"Central",status:"Producing",oil:2750,target:2600,gas:2.1,water:8.9,pressure:1910,downtime:0,uptime:99.6,last:"21 Aug 2026",next:"21 Sep 2026"},
+{code:"WF-006",name:"South-01",zone:"South",status:"Producing",oil:1980,target:2050,gas:1.2,water:13.0,pressure:1690,downtime:0,uptime:98.1,last:"01 Sep 2026",next:"01 Oct 2026"},
+{code:"WF-007",name:"South-02",zone:"South",status:"Shut-in",oil:0,target:1750,gas:0,water:21.4,pressure:0,downtime:72,uptime:65.4,last:"19 Jul 2026",next:"30 Sep 2026"},
+{code:"WF-008",name:"South-03",zone:"South",status:"Producing",oil:2430,target:2400,gas:1.7,water:9.8,pressure:1835,downtime:0,uptime:99.0,last:"30 Aug 2026",next:"30 Sep 2026"}],
+facilities:[
+{tag:"CPF-01",name:"Central Processing Facility",status:"Running",availability:98.7,throughput:"14,950 BBL/d",alarm:"Normal"},
+{tag:"CS-01",name:"Gas Compression Station",status:"Warning",availability:94.2,throughput:"8.1 MMSCF/d",alarm:"High vibration C-04"},
+{tag:"TF-01",name:"Tank Farm",status:"Running",availability:99.4,throughput:"62% inventory",alarm:"Normal"},
+{tag:"UT-01",name:"Utilities / Power",status:"Running",availability:97.8,throughput:"4.6 MW",alarm:"Generator G-07 degraded"}],
+alarms:[
+{level:"critical",title:"WF-003 ESP trip",msg:"Well shut down. Corrective WO-26091 open. Estimated impact 1,900 BBL/day."},
+{level:"warning",title:"Compressor C-04 high vibration",msg:"Condition exceeds warning threshold. Inspection in progress."},
+{level:"warning",title:"ESP Seal Kit below minimum stock",msg:"3 units available vs minimum stock of 5."},
+{level:"info",title:"Tank Farm inspection finding",msg:"Corrective action assigned to Operations."}],
+assets:[
+{tag:"P-101",name:"Main Transfer Pump",category:"Pump",status:"Running",criticality:"Critical",location:"CPF",next:"25 Sep 2026"},
+{tag:"C-04",name:"Gas Compressor 04",category:"Compressor",status:"Maintenance",criticality:"Critical",location:"Compression Station",next:"19 Sep 2026"},
+{tag:"TK-11",name:"Crude Storage Tank 11",category:"Tank",status:"Running",criticality:"High",location:"Tank Farm",next:"03 Oct 2026"},
+{tag:"G-07",name:"Emergency Generator 07",category:"Generator",status:"Degraded",criticality:"High",location:"Substation B",next:"20 Sep 2026"}],
+workorders:[
+{wo:"WO-26091",asset:"ESP Pump / WF-003",type:"Corrective",priority:"Critical",status:"Open",due:"18 Sep",owner:"Maintenance A",cost:32000},
+{wo:"WO-26092",asset:"Compressor C-04",type:"Preventive",priority:"High",status:"In Progress",due:"19 Sep",owner:"Mechanical",cost:12500},
+{wo:"WO-26093",asset:"Tank TK-11",type:"Inspection",priority:"Medium",status:"Planned",due:"22 Sep",owner:"Integrity",cost:4800},
+{wo:"WO-26094",asset:"Generator G-07",type:"Corrective",priority:"High",status:"Open",due:"18 Sep",owner:"Electrical",cost:7600}],
+hse:[
+{ref:"HSE-26031",category:"Near Miss",severity:"Low",status:"Closed",date:"15 Sep",area:"CPF",owner:"HSE Team"},
+{ref:"HSE-26032",category:"Inspection Finding",severity:"Medium",status:"Open",date:"17 Sep",area:"Tank Farm",owner:"Operations"}],
+ptw:[
+{permit:"PTW-1041",type:"Hot Work",area:"Compression Station",job:"C-04 inspection",status:"Approved",expiry:"19 Sep 18:00"},
+{permit:"PTW-1042",type:"Electrical",area:"Substation B",job:"G-07 corrective work",status:"Pending",expiry:"19 Sep 20:00"},
+{permit:"PTW-1043",type:"Confined Space",area:"Tank Farm",job:"TK-11 inspection",status:"Approved",expiry:"20 Sep 16:00"}],
+inventory:[
+{sku:"SP-ESP-001",item:"ESP Seal Kit",qty:3,min:5,unit:"EA",location:"WH-A1",value:12600},
+{sku:"INS-PT-014",item:"Pressure Transmitter",qty:11,min:8,unit:"EA",location:"WH-B2",value:10450},
+{sku:"VAL-GV-004",item:"4in Gate Valve",qty:2,min:4,unit:"EA",location:"WH-C1",value:5400},
+{sku:"LUB-2050",item:"Lubricant 20W-50",qty:28,min:20,unit:"DRUM",location:"WH-D3",value:8680}],
+procurement:[
+{pr:"PR-26041",desc:"ESP spare parts package",requester:"Maintenance",amount:185000,stage:"RFQ",vendor:"TBD"},
+{pr:"PR-26042",desc:"Pressure transmitters",requester:"Instrumentation",amount:42000,stage:"Approval",vendor:"TBD"},
+{pr:"PR-26043",desc:"Valve overhaul service",requester:"Integrity",amount:67000,stage:"PO Issued",vendor:"Demo Vendor"}],
+contracts:[
+{contract:"CTR-026",contractor:"Delta Field Services",scope:"Mechanical maintenance",value:850000,progress:72,expiry:"31 Mar 2027",status:"Active",sla:96},
+{contract:"CTR-031",contractor:"Prime Inspection Co.",scope:"NDT & inspection",value:410000,progress:46,expiry:"15 Dec 2026",status:"Active",sla:92},
+{contract:"CTR-034",contractor:"PowerTech Services",scope:"Electrical support",value:260000,progress:31,expiry:"28 Feb 2027",status:"Active",sla:97}],
+finance:[
+{category:"Maintenance",type:"OPEX",budget:220000,actual:184000,cc:"CC-MNT"},
+{category:"Operations",type:"OPEX",budget:310000,actual:298000,cc:"CC-OPS"},
+{category:"Well Intervention",type:"OPEX",budget:145000,actual:171000,cc:"CC-WELL"},
+{category:"Facility Upgrade",type:"CAPEX",budget:500000,actual:210000,cc:"CC-CAPEX"}]
+};
+const titles={executive:"Executive Overview",production:"Production & Wells",facilities:"Facilities & SCADA",maintenance:"Asset & Maintenance",intervention:"Well Intervention",hse:"HSE & Permit to Work",materials:"Materials & Procurement",contracts:"Contracts & Contractors",finance:"Cost Control",reports:"Reports & Analytics",integration:"SAP / OT Integration"};
+function money(n){return "$"+Number(n).toLocaleString()}
+function T(rows,cols){return '<table><thead><tr>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+cols.map(c=>'<td>'+((c[0]==="status"||c[0]==="priority")?'<span class="status '+String(r[c[0]]).replaceAll(" ","-")+'">'+r[c[0]]+'</span>':r[c[0]])+'</td>').join('')+'</tr>').join('')+'</tbody></table>'}
+function kpi(label,value,sub){return '<div class="card"><div class="k">'+label+'</div><div class="v">'+value+'</div><div class="sub">'+sub+'</div></div>'}
+function go(id){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("[data-sec]").forEach(b=>b.classList.toggle("active",b.dataset.sec===id));pageTitle.textContent=titles[id];window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>go(b.dataset.sec));
+const mnav=document.getElementById("mobileNav");["executive","production","facilities","maintenance","intervention","hse","materials","finance","integration"].forEach(id=>{let b=document.createElement("button");b.dataset.sec=id;b.textContent=titles[id].split(" ")[0];b.onclick=()=>go(id);if(id==="executive")b.classList.add("active");mnav.appendChild(b)});
+const oil=D.wells.reduce((a,x)=>a+x.oil,0),target=D.wells.reduce((a,x)=>a+x.target,0),active=D.wells.filter(x=>x.status==="Producing").length,gap=target-oil;
+execKpis.innerHTML=kpi("Today's Oil Production",oil.toLocaleString(),"BBL/day") + kpi("Daily Target",target.toLocaleString(),"BBL/day") + kpi("Producing Wells",active+"/"+D.wells.length,"Field availability") + kpi("Production Gap",gap.toLocaleString(),"BBL/day vs target");
+execWellTable.innerHTML=T(D.wells,[["code","Well"],["status","Status"],["oil","Oil BBL/d"],["target","Target"],["uptime","Uptime %"]]);
+actionCenter.innerHTML=D.alarms.map(a=>'<div class="alarm '+a.level+'"><b>'+a.title+'</b><p>'+a.msg+'</p></div>').join("");
+let att=Math.round(oil/target*100);attainment.innerHTML='<div class="metricRow"><label>Daily target</label><div class="bar green"><i style="width:'+att+'%"></i></div><span class="small">'+att+'%</span></div><div class="metricRow"><label>Field availability</label><div class="bar green"><i style="width:94%"></i></div><span class="small">94%</span></div><div class="metricRow"><label>Export readiness</label><div class="bar green"><i style="width:97%"></i></div><span class="small">97%</span></div>';
+maintenanceHealth.innerHTML='<div class="metricRow"><label>PM compliance</label><div class="bar green"><i style="width:91%"></i></div><span class="small">91%</span></div><div class="metricRow"><label>Backlog risk</label><div class="bar amber"><i style="width:38%"></i></div><span class="small">Medium</span></div><div class="metricRow"><label>Critical WO</label><div class="bar"><i style="width:25%"></i></div><span class="small">1</span></div>';
+hseSnapshot.innerHTML='<div class="metricRow"><label>Days without LTI</label><div class="bar green"><i style="width:88%"></i></div><span class="small">126</span></div><div class="metricRow"><label>Open findings</label><div class="bar amber"><i style="width:20%"></i></div><span class="small">1</span></div><div class="metricRow"><label>PTW compliance</label><div class="bar green"><i style="width:96%"></i></div><span class="small">96%</span></div>';
+const positions=[[15,22],[29,18],[42,28],[55,17],[28,60],[47,63],[68,52],[80,68]];
+fieldMap.innerHTML='<span class="zone" style="left:12%;top:8%">North Zone</span><span class="zone" style="left:43%;top:44%">Central Zone</span><span class="zone" style="left:68%;top:80%">South Zone</span><div class="facility" style="left:49%;top:39%">CPF-01</div><div class="facility" style="left:64%;top:28%">CS-01</div><div class="facility" style="left:72%;top:42%">TF-01</div>'+D.wells.map((w,i)=>'<div title="'+w.code+' • '+w.status+'" class="well '+(w.status==="Producing"?"prod":w.status==="Down"?"down":w.status==="Maintenance"?"maint":"shut")+'" style="left:'+positions[i][0]+'%;top:'+positions[i][1]+'%" onclick="wellDetail(\''+w.code+'\')"></div>').join("");
+prodKpis.innerHTML=kpi("Field Production",oil.toLocaleString(),"BBL/day")+kpi("Gas Production",D.wells.reduce((a,x)=>a+x.gas,0).toFixed(1),"MMSCF/day")+kpi("Average Water Cut",(D.wells.reduce((a,x)=>a+x.water,0)/D.wells.length).toFixed(1)+"%","Across wells")+kpi("Downtime",D.wells.reduce((a,x)=>a+x.downtime,0),"Hours");
+lossDrivers.innerHTML='<div class="alarm critical"><b>WF-003 down</b><p>1,900 BBL/day target production unavailable.</p></div><div class="alarm warning"><b>WF-004 maintenance</b><p>2,100 BBL/day temporarily unavailable.</p></div><div class="alarm info"><b>WF-007 shut-in</b><p>Commercial/operational review required before restart.</p></div>';
+wellTable.innerHTML=T(D.wells,[["code","Well"],["name","Name"],["zone","Zone"],["status","Status"],["oil","Oil"],["target","Target"],["gas","Gas"],["water","Water %"],["pressure","PSI"],["uptime","Uptime %"]]);
+facilityKpis.innerHTML=kpi("CPF Availability","98.7%","Central processing")+kpi("Compression Availability","94.2%","Condition alert active")+kpi("Tank Utilization","62%","Storage inventory")+kpi("Power Demand","4.6 MW","Utilities");
+facilityTable.innerHTML=T(D.facilities,[["tag","Tag"],["name","Facility"],["status","Status"],["availability","Availability %"],["throughput","Throughput / Load"],["alarm","Current Alarm"]]);
+alarmList.innerHTML=D.alarms.map(a=>'<div class="alarm '+a.level+'"><b>'+a.title+'</b><p>'+a.msg+'</p></div>').join("");
+maintKpis.innerHTML=kpi("Open Work Orders","3","1 critical")+kpi("PM Compliance","91%","Monthly")+kpi("Critical Assets","2","Active focus")+kpi("Maintenance Spend",money(D.workorders.reduce((a,x)=>a+x.cost,0)),"Open/planned work");
+assetTable.innerHTML=T(D.assets,[["tag","Tag"],["name","Asset"],["category","Category"],["status","Status"],["criticality","Criticality"],["location","Location"],["next","Next PM"]]);
+backlogBars.innerHTML='<div class="metricRow"><label>Critical</label><div class="bar"><i style="width:25%"></i></div><span class="small">1</span></div><div class="metricRow"><label>High</label><div class="bar amber"><i style="width:50%"></i></div><span class="small">2</span></div><div class="metricRow"><label>Medium</label><div class="bar green"><i style="width:25%"></i></div><span class="small">1</span></div>';
+woTable.innerHTML=T(D.workorders,[["wo","Work Order"],["asset","Asset"],["type","Type"],["priority","Priority"],["status","Status"],["due","Due"],["owner","Owner"],["cost","Cost USD"]]);
+hseKpis.innerHTML=kpi("Days Without LTI","126","Field-wide")+kpi("Open Findings","1","Corrective action active")+kpi("Active PTWs","3","2 approved / 1 pending")+kpi("PTW Compliance","96%","Current month");
+hseTable.innerHTML=T(D.hse,[["ref","Reference"],["category","Category"],["severity","Severity"],["status","Status"],["date","Date"],["area","Area"],["owner","Action Owner"]]);
+ptwTable.innerHTML=T(D.ptw,[["permit","Permit"],["type","Type"],["area","Area"],["job","Job"],["status","Status"],["expiry","Expiry"]]);
+inventoryTable.innerHTML=T(D.inventory,[["sku","SKU"],["item","Item"],["qty","Qty"],["min","Min"],["unit","Unit"],["location","Location"],["value","Stock Value"]]);
+procurementTable.innerHTML=T(D.procurement,[["pr","PR"],["desc","Description"],["requester","Requester"],["amount","Amount USD"],["stage","Stage"],["vendor","Vendor"]]);
+contractKpis.innerHTML=kpi("Active Contracts",D.contracts.length,"Operational services")+kpi("Contract Value",money(D.contracts.reduce((a,x)=>a+x.value,0)),"Current portfolio")+kpi("Avg SLA",(D.contracts.reduce((a,x)=>a+x.sla,0)/D.contracts.length).toFixed(1)+"%","Service performance")+kpi("Nearest Expiry","15 Dec 2026","CTR-031");
+contractTable.innerHTML=T(D.contracts,[["contract","Contract"],["contractor","Contractor"],["scope","Scope"],["value","Value USD"],["progress","Progress %"],["sla","SLA %"],["expiry","Expiry"],["status","Status"]]);
+const budget=D.finance.reduce((a,x)=>a+x.budget,0),actual=D.finance.reduce((a,x)=>a+x.actual,0);
+financeKpis.innerHTML=kpi("Total Budget",money(budget),"Current period")+kpi("Actual Spend",money(actual),"Current period")+kpi("Variance",money(budget-actual),"Budget remaining")+kpi("Utilization",Math.round(actual/budget*100)+"%","Budget utilization");
+financeTable.innerHTML=T(D.finance,[["category","Category"],["type","Type"],["budget","Budget USD"],["actual","Actual USD"],["cc","Cost Center"]]);
+financeBars.innerHTML=D.finance.map(x=>'<div class="metricRow"><label>'+x.category+'</label><div class="bar '+(x.actual>x.budget?"":"green")+'"><i style="width:'+Math.min(100,Math.round(x.actual/x.budget*100))+'%"></i></div><span class="small">'+Math.round(x.actual/x.budget*100)+'%</span></div>').join("");
+const reports=[["Daily Production Report","Well production, target variance, downtime and operational notes."],["Executive Field Report","Production, availability, HSE, maintenance, inventory and cost summary."],["Maintenance KPI Report","PM compliance, backlog, critical work orders, MTBF/MTTR framework."],["HSE & PTW Report","Incidents, near misses, findings, permits and corrective actions."],["Inventory Criticality Report","Critical spares, reorder exposure and stock value."],["Cost & Procurement Report","OPEX/CAPEX, PR/PO pipeline and cost-center performance."]];
+reportCards.innerHTML=reports.map(r=>'<div class="reportCard"><b>'+r[0]+'</b><p>'+r[1]+'</p><button class="btn soft" onclick="alert(\'Demo report preview — production version can export PDF/Excel.\')">Preview</button></div>').join("");
+integrationTable.innerHTML=T([
+{source:"SCADA / Historian",data:"Production, pressure, alarms",method:"OPC-UA / historian API / gateway",owner:"Operations"},
+{source:"SAP EAM / PM",data:"Assets, notifications, work orders",method:"SAP APIs / middleware",owner:"Maintenance"},
+{source:"SAP MM",data:"Materials, PR, PO, goods receipt",method:"SAP APIs / middleware",owner:"Supply Chain"},
+{source:"SAP FI/CO",data:"Cost centers, actuals, budget",method:"SAP APIs / middleware",owner:"Finance"},
+{source:"AD / Identity",data:"Users, roles, groups",method:"LDAP / SSO / SAML/OIDC",owner:"IT Security"}
+],[["source","System"],["data","Data Domain"],["method","Integration Pattern"],["owner","Business Owner"]]);
+function wellDetail(code){let w=D.wells.find(x=>x.code===code);modalContent.innerHTML='<h2>'+w.code+' · '+w.name+'</h2><p class="small">Detailed well card — demonstration data</p><div class="kpis">'+kpi("Status",w.status,"Current operational state")+kpi("Oil",w.oil.toLocaleString(),"BBL/day")+kpi("Target",w.target.toLocaleString(),"BBL/day")+kpi("Pressure",w.pressure.toLocaleString(),"PSI")+'</div><div class="grid2"><div class="panel"><h3>Well Performance</h3><div class="metricRow"><label>Target attainment</label><div class="bar green"><i style="width:'+Math.min(100,Math.round(w.oil/w.target*100))+'%"></i></div><span class="small">'+(w.target?Math.round(w.oil/w.target*100):0)+'%</span></div><div class="metricRow"><label>Uptime</label><div class="bar green"><i style="width:'+w.uptime+'%"></i></div><span class="small">'+w.uptime+'%</span></div><p><b>Water cut:</b> '+w.water+'%<br><b>Gas:</b> '+w.gas+' MMSCF/d<br><b>Downtime:</b> '+w.downtime+' h</p></div><div class="panel"><h3>Maintenance</h3><p><b>Last maintenance:</b> '+w.last+'<br><b>Next PM:</b> '+w.next+'</p><p class="small">In production, this panel can display related SAP work orders, notifications, BOM/spares and intervention history.</p></div></div>';modal.classList.add("show")}
+const CFG=window.CLIENT_CONFIG||{};
+document.getElementById("clientBadge").textContent=CFG.confidentiality||"Confidential Client Demonstration";
+document.title="SmartField 360™ | "+(CFG.clientName||"Client Oilfield");
+const interventionRows=[
+{well:"WF-003",issue:"ESP Trip",loss:1900,priority:"Critical",scope:"ESP recovery / replacement",eta:"24-48 h",gain:1900,status:"Ready for Review"},
+{well:"WF-004",issue:"Planned Maintenance",loss:2100,priority:"High",scope:"Complete maintenance & restart",eta:"8-12 h",gain:2100,status:"In Progress"},
+{well:"WF-007",issue:"Shut-in Review",loss:1750,priority:"Medium",scope:"Integrity / restart assessment",eta:"TBD",gain:1750,status:"Engineering Review"}];
+interventionKpis.innerHTML=kpi("Recoverable Production","5,750","BBL/day opportunity")+kpi("Highest Priority","WF-003","ESP-related loss")+kpi("Open Candidates","3","Technical review queue")+kpi("Potential Uplift","+"+Math.round(5750/target*100)+"%","Vs current field target");
+interventionTable.innerHTML=T(interventionRows,[["well","Well"],["issue","Issue"],["loss","Loss BBL/d"],["priority","Priority"],["scope","Proposed Scope"],["eta","ETA"],["gain","Expected Gain"],["status","Status"]]);
+recoveryBars.innerHTML=interventionRows.map(x=>'<div class="metricRow"><label>'+x.well+'</label><div class="bar '+(x.priority==="Critical"?"":"amber")+'"><i style="width:'+Math.min(100,Math.round(x.gain/2100*100))+'%"></i></div><span class="small">+'+x.gain.toLocaleString()+' BBL/d</span></div>').join("");
+
+
+const DEMO_USERS={
+ admin:{password:"SmartField360!",name:"System Admin",role:"Executive"},
+ manager:{password:"Field360!",name:"Field Manager",role:"Operations"},
+ engineer:{password:"Engineer360!",name:"Operations Engineer",role:"Maintenance"}
+};
+function showSession(){
+ const s=JSON.parse(localStorage.getItem("sf360-session")||"null");
+ if(s){loginGate.style.display="none";userChip.textContent=s.name+" • "+s.role}else{loginGate.style.display="flex";userChip.textContent="Guest"}
+}
+loginBtn.onclick=()=>{
+ const u=loginUser.value.trim(),p=loginPass.value;
+ if(DEMO_USERS[u]&&DEMO_USERS[u].password===p){
+  const s={user:u,name:DEMO_USERS[u].name,role:loginRole.value||DEMO_USERS[u].role};
+  localStorage.setItem("sf360-session",JSON.stringify(s));loginError.textContent="";showSession();
+ }else loginError.textContent="Invalid demo username or password.";
+};
+logoutBtn.onclick=()=>{localStorage.removeItem("sf360-session");showSession()};
+function csvEscape(v){v=String(v??"");return '"'+v.replaceAll('"','""')+'"'}
+function downloadCSV(){
+ const rows=[["Well","Status","Oil BBL/d","Target","Gas MMSCF/d","Water Cut %","Pressure PSI","Uptime %"],...D.wells.map(w=>[w.code,w.status,w.oil,w.target,w.gas,w.water,w.pressure,w.uptime])];
+ const csv=rows.map(r=>r.map(csvEscape).join(",")).join("\n");
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="SmartField360_Oilfield_Report.csv";a.click();URL.revokeObjectURL(a.href);
+}
+excelBtn.onclick=downloadCSV;
+pdfBtn.onclick=()=>window.print();
+showSession();
+const I18N={
+en:{
+"nav.executive":"Executive Overview","nav.production":"Production & Wells","nav.facilities":"Facilities & SCADA","nav.maintenance":"Asset & Maintenance","nav.intervention":"Well Intervention","nav.hse":"HSE & Permit to Work","nav.materials":"Materials & Procurement","nav.contracts":"Contracts & Contractors","nav.finance":"Cost Control","nav.reports":"Reports & Analytics","nav.integration":"SAP / OT Integration",
+"hero.exec":"Oilfield Integrated Operations Command Center","hero.production":"Production & Well Operations","hero.facilities":"Facilities & SCADA Operations","hero.maintenance":"Asset Integrity & Maintenance","hero.intervention":"Well Intervention & Production Recovery","hero.hse":"HSE & Permit to Work","hero.materials":"Materials, Warehouse & Procurement","hero.contracts":"Contracts & Contractor Performance","hero.finance":"OPEX / CAPEX Cost Control","hero.reports":"Reports & Management Analytics","hero.integration":"SAP / OT Integration Architecture",
+"page.executive":"Executive Overview","page.production":"Production & Wells","page.facilities":"Facilities & SCADA","page.maintenance":"Asset & Maintenance","page.intervention":"Well Intervention","page.hse":"HSE & Permit to Work","page.materials":"Materials & Procurement","page.contracts":"Contracts & Contractors","page.finance":"Cost Control","page.reports":"Reports & Analytics","page.integration":"SAP / OT Integration",
+"badge":"Confidential Client Demonstration"
+},
+ar:{
+"nav.executive":"النظرة التنفيذية","nav.production":"الإنتاج والآبار","nav.facilities":"المرافق وSCADA","nav.maintenance":"الأصول والصيانة","nav.intervention":"تدخلات الآبار","nav.hse":"السلامة وتصاريح العمل","nav.materials":"المواد والمشتريات","nav.contracts":"العقود والمقاولون","nav.finance":"التحكم بالكلف","nav.reports":"التقارير والتحليلات","nav.integration":"تكامل SAP / OT",
+"hero.exec":"مركز القيادة المتكامل لعمليات الحقل النفطي","hero.production":"الإنتاج وعمليات الآبار","hero.facilities":"عمليات المرافق وSCADA","hero.maintenance":"سلامة الأصول والصيانة","hero.intervention":"تدخلات الآبار واستعادة الإنتاج","hero.hse":"السلامة والصحة والبيئة وتصاريح العمل","hero.materials":"المواد والمخازن والمشتريات","hero.contracts":"العقود وأداء المقاولين","hero.finance":"التحكم بكلف OPEX / CAPEX","hero.reports":"التقارير والتحليلات الإدارية","hero.integration":"معمارية تكامل SAP / OT",
+"page.executive":"النظرة التنفيذية","page.production":"الإنتاج والآبار","page.facilities":"المرافق وSCADA","page.maintenance":"الأصول والصيانة","page.intervention":"تدخلات الآبار","page.hse":"السلامة وتصاريح العمل","page.materials":"المواد والمشتريات","page.contracts":"العقود والمقاولون","page.finance":"التحكم بالكلف","page.reports":"التقارير والتحليلات","page.integration":"تكامل SAP / OT",
+"badge":"عرض سري مخصص للعميل"
+}};
+let currentLang=localStorage.getItem("sf360-lang")||"en";
+function applyLang(lang){
+ currentLang=lang;localStorage.setItem("sf360-lang",lang);
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(I18N[lang][k])el.textContent=I18N[lang][k]});
+ enBtn.classList.toggle("active",lang==="en");arBtn.classList.toggle("active",lang==="ar");
+ clientBadge.textContent=I18N[lang].badge;
+ const active=document.querySelector(".section.active")?.id||"executive";
+ pageTitle.textContent=I18N[lang]["page."+active]||titles[active];
+}
+enBtn.onclick=()=>applyLang("en");arBtn.onclick=()=>applyLang("ar");
+const oldGo=go;go=function(id){oldGo(id);pageTitle.textContent=I18N[currentLang]["page."+id]||titles[id];};
+applyLang(currentLang);
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
+</script>
+
+<script>
+(function(){
+  const dict={
+    en:{
+      "Executive Overview":"Executive Overview",
+      "Production & Wells":"Production & Wells",
+      "Facilities & SCADA":"Facilities & SCADA",
+      "Asset & Maintenance":"Asset & Maintenance",
+      "Well Intervention":"Well Intervention",
+      "HSE & Permit to Work":"HSE & Permit to Work",
+      "Materials & Procurement":"Materials & Procurement",
+      "Contracts & Contractors":"Contracts & Contractors",
+      "Cost Control":"Cost Control",
+      "Reports & Analytics":"Reports & Analytics",
+      "SAP / OT Integration":"SAP / OT Integration",
+      "Oilfield Integrated Operations Command Center":"Oilfield Integrated Operations Command Center",
+      "Production & Well Operations":"Production & Well Operations",
+      "Facilities & SCADA Operations":"Facilities & SCADA Operations",
+      "Asset Integrity & Maintenance":"Asset Integrity & Maintenance",
+      "Well Intervention & Production Recovery":"Well Intervention & Production Recovery",
+      "HSE & Permit to Work":"HSE & Permit to Work",
+      "Materials, Warehouse & Procurement":"Materials, Warehouse & Procurement",
+      "Contracts & Contractor Performance":"Contracts & Contractor Performance",
+      "OPEX / CAPEX Cost Control":"OPEX / CAPEX Cost Control",
+      "Reports & Management Analytics":"Reports & Management Analytics",
+      "SAP / OT Integration Architecture":"SAP / OT Integration Architecture"
+    },
+    ar:{
+      "Executive Overview":"النظرة التنفيذية",
+      "Production & Wells":"الإنتاج والآبار",
+      "Facilities & SCADA":"المرافق وSCADA",
+      "Asset & Maintenance":"الأصول والصيانة",
+      "Well Intervention":"تدخلات الآبار",
+      "HSE & Permit to Work":"السلامة وتصاريح العمل",
+      "Materials & Procurement":"المواد والمشتريات",
+      "Contracts & Contractors":"العقود والمقاولون",
+      "Cost Control":"التحكم بالكلف",
+      "Reports & Analytics":"التقارير والتحليلات",
+      "SAP / OT Integration":"تكامل SAP / OT",
+      "Oilfield Integrated Operations Command Center":"مركز القيادة المتكامل لعمليات الحقل النفطي",
+      "Production & Well Operations":"الإنتاج وعمليات الآبار",
+      "Facilities & SCADA Operations":"عمليات المرافق وSCADA",
+      "Asset Integrity & Maintenance":"سلامة الأصول والصيانة",
+      "Well Intervention & Production Recovery":"تدخلات الآبار واستعادة الإنتاج",
+      "HSE & Permit to Work":"السلامة والصحة والبيئة وتصاريح العمل",
+      "Materials, Warehouse & Procurement":"المواد والمخازن والمشتريات",
+      "Contracts & Contractor Performance":"العقود وأداء المقاولين",
+      "OPEX / CAPEX Cost Control":"التحكم بكلف OPEX / CAPEX",
+      "Reports & Management Analytics":"التقارير والتحليلات الإدارية",
+      "SAP / OT Integration Architecture":"معمارية تكامل SAP / OT"
+    }
+  };
+
+  function switchLang(lang){
+    try{
+      localStorage.setItem("sf360-lang2",lang);
+      document.documentElement.lang=lang;
+      document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+      document.querySelectorAll("[data-i18n]").forEach(function(el){
+        const original=el.getAttribute("data-en") || el.textContent.trim();
+        if(!el.getAttribute("data-en")) el.setAttribute("data-en", original);
+        const key=el.getAttribute("data-en");
+        if(dict[lang][key]) el.textContent=dict[lang][key];
+      });
+
+      document.querySelectorAll("aside button span[data-i18n]").forEach(function(el){
+        const key=el.getAttribute("data-en") || el.textContent.trim();
+        if(!el.getAttribute("data-en")) el.setAttribute("data-en",key);
+        if(dict[lang][el.getAttribute("data-en")]) el.textContent=dict[lang][el.getAttribute("data-en")];
+      });
+
+      const map={
+        executive:["Executive Overview","النظرة التنفيذية"],
+        production:["Production & Wells","الإنتاج والآبار"],
+        facilities:["Facilities & SCADA","المرافق وSCADA"],
+        maintenance:["Asset & Maintenance","الأصول والصيانة"],
+        intervention:["Well Intervention","تدخلات الآبار"],
+        hse:["HSE & Permit to Work","السلامة وتصاريح العمل"],
+        materials:["Materials & Procurement","المواد والمشتريات"],
+        contracts:["Contracts & Contractors","العقود والمقاولون"],
+        finance:["Cost Control","التحكم بالكلف"],
+        reports:["Reports & Analytics","التقارير والتحليلات"],
+        integration:["SAP / OT Integration","تكامل SAP / OT"]
+      };
+      const active=document.querySelector(".section.active");
+      if(active && map[active.id]){
+        const pt=document.getElementById("pageTitle");
+        if(pt) pt.textContent=map[active.id][lang==="ar"?1:0];
+      }
+      const badge=document.getElementById("clientBadge");
+      if(badge) badge.textContent=lang==="ar"?"عرض سري مخصص للعميل":"Confidential Client Demonstration";
+
+      const en=document.getElementById("enBtn"), ar=document.getElementById("arBtn");
+      if(en) en.classList.toggle("active",lang==="en");
+      if(ar) ar.classList.toggle("active",lang==="ar");
+    }catch(e){ console.error("Language switch failed",e); }
+  }
+
+  window.switchSmartFieldLang=switchLang;
+  document.addEventListener("DOMContentLoaded",function(){
+    const en=document.getElementById("enBtn"), ar=document.getElementById("arBtn");
+    if(en) en.onclick=function(ev){ev.preventDefault();switchLang("en");};
+    if(ar) ar.onclick=function(ev){ev.preventDefault();switchLang("ar");};
+    switchLang(localStorage.getItem("sf360-lang2")||"en");
+  });
+})();
+</script>
+</body></html>
