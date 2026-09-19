@@ -1,46 +1,99 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111318">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon.svg">
-<title>SmartField 360™</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#111318}
-.shellbar{height:58px;background:#111318;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid #2b2f36}
-.brand{display:flex;align-items:center;gap:9px}.brand img{width:36px;height:36px;border-radius:8px}.brand b{font-size:14px}.brand small{display:block;color:#9aa0aa;font-size:9px}
-.lang{display:flex;border:1px solid #444b55;border-radius:9px;overflow:hidden}.lang button{border:0;padding:8px 13px;background:#fff;color:#16181d;font-weight:700;font-size:11px;cursor:pointer}.lang button.active{background:#d71920;color:#fff}
-iframe{width:100%;height:calc(100vh - 58px);border:0;display:block;background:#f3f5f7}
-@media(max-width:600px){.brand small{display:none}.shellbar{height:54px}.brand img{width:32px;height:32px}iframe{height:calc(100vh - 54px)}}
-</style>
-</head>
-<body>
-<div class="shellbar">
-  <div class="brand"><img src="icons/icon.svg"><div><b>SmartField 360™</b><small>Smart Innovation for Engineering & IT</small></div></div>
-  <div class="lang">
-    <button id="enBtn">EN</button>
-    <button id="arBtn">عربي</button>
-  </div>
-</div>
-<iframe id="appFrame" title="SmartField 360"></iframe>
+
+
+
+
 <script>
 (function(){
- const frame=document.getElementById('appFrame');
- const enBtn=document.getElementById('enBtn');
- const arBtn=document.getElementById('arBtn');
- function load(lang){
-   localStorage.setItem('sf360-shell-lang',lang);
-   frame.src=(lang==='ar'?'ar.html':'en.html')+'?v=10';
-   enBtn.classList.toggle('active',lang==='en');
-   arBtn.classList.toggle('active',lang==='ar');
-   document.documentElement.lang=lang;
-   document.documentElement.dir=lang==='ar'?'rtl':'ltr';
- }
- enBtn.onclick=()=>load('en');
- arBtn.onclick=()=>load('ar');
- load(localStorage.getItem('sf360-shell-lang')||'en');
+  const pairs = [
+    ["Executive Overview","النظرة التنفيذية"],["Production & Wells","الإنتاج والآبار"],["Facilities & SCADA","المرافق وSCADA"],
+    ["Asset & Maintenance","الأصول والصيانة"],["Well Intervention","تدخلات الآبار"],["HSE & Permit to Work","السلامة والصحة والبيئة وتصاريح العمل"],
+    ["Materials & Procurement","المواد والمشتريات"],["Contracts & Contractors","العقود والمقاولون"],["Cost Control","التحكم بالكلف"],
+    ["Reports & Analytics","التقارير والتحليلات"],["SAP / OT Integration","تكامل SAP / OT"],
+    ["Oilfield Integrated Operations Command Center","مركز القيادة المتكامل لعمليات الحقل النفطي"],
+    ["Production & Well Operations","الإنتاج وعمليات الآبار"],["Facilities & SCADA Operations","عمليات المرافق وSCADA"],
+    ["Asset Integrity & Maintenance","سلامة الأصول والصيانة"],["Well Intervention & Production Recovery","تدخلات الآبار واستعادة الإنتاج"],
+    ["Materials, Warehouse & Procurement","المواد والمخازن والمشتريات"],["Contracts & Contractor Performance","العقود وأداء المقاولين"],
+    ["OPEX / CAPEX Cost Control","التحكم بكلف OPEX / CAPEX"],["Reports & Management Analytics","التقارير والتحليلات الإدارية"],
+    ["SAP / OT Integration Architecture","معمارية تكامل SAP / OT"],["Confidential Client Demonstration","عرض سري مخصص للعميل"],
+    ["Platform Online","النظام متصل"],["Demo Data","بيانات تجريبية"],["Command Center","مركز القيادة"],["Operations","العمليات"],["Management","الإدارة"],
+    ["Today's Oil Production","إنتاج النفط اليوم"],["Daily Target","الهدف اليومي"],["Producing Wells","الآبار المنتجة"],["Production Gap","فجوة الإنتاج"],
+    ["Production Performance by Well","أداء الإنتاج حسب البئر"],["Operations Action Center","مركز الإجراءات التشغيلية"],["Production Attainment","تحقيق هدف الإنتاج"],
+    ["Maintenance Health","حالة الصيانة"],["HSE Snapshot","ملخص السلامة"],["Digital Oilfield Map","الخريطة الرقمية للحقل النفطي"],
+    ["Field KPIs","مؤشرات أداء الحقل"],["Production Loss Drivers","أسباب خسارة الإنتاج"],["Well Production Register","سجل إنتاج الآبار"],
+    ["Facility Status","حالة المرافق"],["SCADA Alarm Console","وحدة إنذارات SCADA"],["Process Overview","نظرة عامة على العملية"],
+    ["Critical Asset Register","سجل الأصول الحرجة"],["Maintenance Backlog by Priority","تراكم أعمال الصيانة حسب الأولوية"],["Open Work Orders","أوامر العمل المفتوحة"],
+    ["HSE Register","سجل السلامة"],["Active Permits to Work","تصاريح العمل الفعالة"],["Critical Spare Parts","قطع الغيار الحرجة"],
+    ["Procurement Pipeline","مسار المشتريات"],["Budget vs Actual","الميزانية مقابل الفعلي"],["Cost Utilization","استخدام الميزانية"],
+    ["Enterprise Integration Scope","نطاق التكامل المؤسسي"],["Cybersecurity Controls","ضوابط الأمن السيبراني"],
+    ["Identity & Access","الهوية والوصول"],["IT/OT Segmentation","فصل شبكات IT/OT"],["Auditability","قابلية التدقيق"],["Deployment","النشر"],
+    ["Sign In","تسجيل الدخول"],["Username","اسم المستخدم"],["Password","كلمة المرور"],["Role","الدور"],["Logout","تسجيل الخروج"],["Guest","زائر"],
+    ["System Admin","مدير النظام"],["Field Manager","مدير الحقل"],["Operations Engineer","مهندس العمليات"],
+    ["Prepared for Client Oilfield","مُعدّ لعرض الحقل النفطي للعميل"],["Current operational state","الحالة التشغيلية الحالية"],
+    ["Detailed well card — demonstration data","بطاقة تفصيلية للبئر — بيانات تجريبية"],["Well Performance","أداء البئر"],
+    ["Target attainment","تحقيق الهدف"],["Uptime","وقت التشغيل"],["Water cut:","نسبة الماء:"],["Downtime:","وقت التوقف:"],
+    ["Last maintenance:","آخر صيانة:"],["Next PM:","الصيانة الوقائية القادمة:"],["Intervention Candidate Ranking","ترتيب مرشحي التدخل"],
+    ["Recovery Opportunity","فرصة استعادة الإنتاج"],["Planned Intervention Workflow","مسار التدخل المخطط"],["Identify Loss","تحديد الخسارة"],
+    ["Technical Review","المراجعة الفنية"],["Approval","الموافقة"],["Execute","التنفيذ"],["Verify Gain","التحقق من الزيادة"],
+    ["Recoverable Production","الإنتاج القابل للاستعادة"],["Highest Priority","أعلى أولوية"],["Open Candidates","الحالات المفتوحة"],["Potential Uplift","الزيادة المحتملة"],
+    ["Daily Production Report","تقرير الإنتاج اليومي"],["Executive Field Report","التقرير التنفيذي للحقل"],["Maintenance KPI Report","تقرير مؤشرات الصيانة"],
+    ["HSE & PTW Report","تقرير السلامة وتصاريح العمل"],["Inventory Criticality Report","تقرير حرجية المخزون"],["Cost & Procurement Report","تقرير الكلف والمشتريات"],
+    ["Preview","معاينة"],["Well","البئر"],["Status","الحالة"],["Target","الهدف"],["Name","الاسم"],["Zone","المنطقة"],["Oil","النفط"],["Gas","الغاز"],
+    ["Facility","المرفق"],["Asset","الأصل"],["Category","الفئة"],["Criticality","الأهمية"],["Location","الموقع"],["Work Order","أمر العمل"],["Type","النوع"],
+    ["Priority","الأولوية"],["Due","الاستحقاق"],["Owner","المسؤول"],["Reference","المرجع"],["Severity","الخطورة"],["Date","التاريخ"],["Area","المنطقة"],
+    ["Permit","التصريح"],["Job","العمل"],["Expiry","الانتهاء"],["Item","المادة"],["Qty","الكمية"],["Min","الحد الأدنى"],["Unit","الوحدة"],
+    ["Description","الوصف"],["Requester","الطالب"],["Stage","المرحلة"],["Vendor","المورد"],["Contract","العقد"],["Contractor","المقاول"],["Scope","النطاق"],
+    ["System","النظام"],["Business Owner","الجهة المسؤولة"],["Producing","منتج"],["Down","متوقف"],["Shut-in","مغلق"],["Running","يعمل"],
+    ["Warning","تحذير"],["Critical","حرج"],["Open","مفتوح"],["Planned","مخطط"],["Approved","موافق عليه"],["Pending","قيد الانتظار"],
+    ["Closed","مغلق"],["Active","فعال"],["High","عالٍ"],["Medium","متوسط"],["Low","منخفض"],["Maintenance","الصيانة"],
+    ["Field availability","توفر الحقل"],["BBL/day","برميل/يوم"],["Hours","ساعة"],["Current month","الشهر الحالي"],
+    ["Open Findings","الملاحظات المفتوحة"],["Active PTWs","تصاريح العمل الفعالة"],["Total Budget","إجمالي الميزانية"],["Actual Spend","الإنفاق الفعلي"],
+    ["Variance","الانحراف"],["Utilization","نسبة الاستخدام"]
+  ];
+  const enToAr = new Map(pairs), arToEn = new Map(pairs.map(x=>[x[1],x[0]]));
+  let lang = "en";
+
+  function swapText(root,map){
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[]; let n; while(n=walker.nextNode()) nodes.push(n);
+    for(const node of nodes){
+      const raw=node.nodeValue, t=raw.trim();
+      if(!t) continue;
+      if(map.has(t)) node.nodeValue=raw.replace(t,map.get(t));
+    }
+  }
+
+  function apply(l){
+    lang=l;
+    document.documentElement.lang=l;
+    document.documentElement.dir=l==="ar"?"rtl":"ltr";
+    swapText(document.body,l==="ar"?enToAr:arToEn);
+    document.getElementById("langEn")?.classList.toggle("active",l==="en");
+    document.getElementById("langAr")?.classList.toggle("active",l==="ar");
+    localStorage.setItem("sf360-lang-final",l);
+  }
+
+  const observer=new MutationObserver(()=>{ if(lang==="ar") swapText(document.body,enToAr); });
+  observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+
+  document.addEventListener("DOMContentLoaded",async()=>{
+    try{
+      if("serviceWorker" in navigator){
+        const regs=await navigator.serviceWorker.getRegistrations(); for(const r of regs) await r.unregister();
+      }
+      if(window.caches){ for(const k of await caches.keys()) await caches.delete(k); }
+    }catch(e){}
+    document.getElementById("langEn").onclick=()=>apply("en");
+    document.getElementById("langAr").onclick=()=>apply("ar");
+    apply(localStorage.getItem("sf360-lang-final")||"en");
+  });
 })();
 </script>
 </body></html>
