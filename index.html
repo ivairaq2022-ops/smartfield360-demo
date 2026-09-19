@@ -286,4 +286,113 @@ const oldGo=go;go=function(id){oldGo(id);pageTitle.textContent=I18N[currentLang]
 applyLang(currentLang);
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 </script>
+
+<script>
+(function(){
+  const dict={
+    en:{
+      "Executive Overview":"Executive Overview",
+      "Production & Wells":"Production & Wells",
+      "Facilities & SCADA":"Facilities & SCADA",
+      "Asset & Maintenance":"Asset & Maintenance",
+      "Well Intervention":"Well Intervention",
+      "HSE & Permit to Work":"HSE & Permit to Work",
+      "Materials & Procurement":"Materials & Procurement",
+      "Contracts & Contractors":"Contracts & Contractors",
+      "Cost Control":"Cost Control",
+      "Reports & Analytics":"Reports & Analytics",
+      "SAP / OT Integration":"SAP / OT Integration",
+      "Oilfield Integrated Operations Command Center":"Oilfield Integrated Operations Command Center",
+      "Production & Well Operations":"Production & Well Operations",
+      "Facilities & SCADA Operations":"Facilities & SCADA Operations",
+      "Asset Integrity & Maintenance":"Asset Integrity & Maintenance",
+      "Well Intervention & Production Recovery":"Well Intervention & Production Recovery",
+      "HSE & Permit to Work":"HSE & Permit to Work",
+      "Materials, Warehouse & Procurement":"Materials, Warehouse & Procurement",
+      "Contracts & Contractor Performance":"Contracts & Contractor Performance",
+      "OPEX / CAPEX Cost Control":"OPEX / CAPEX Cost Control",
+      "Reports & Management Analytics":"Reports & Management Analytics",
+      "SAP / OT Integration Architecture":"SAP / OT Integration Architecture"
+    },
+    ar:{
+      "Executive Overview":"النظرة التنفيذية",
+      "Production & Wells":"الإنتاج والآبار",
+      "Facilities & SCADA":"المرافق وSCADA",
+      "Asset & Maintenance":"الأصول والصيانة",
+      "Well Intervention":"تدخلات الآبار",
+      "HSE & Permit to Work":"السلامة وتصاريح العمل",
+      "Materials & Procurement":"المواد والمشتريات",
+      "Contracts & Contractors":"العقود والمقاولون",
+      "Cost Control":"التحكم بالكلف",
+      "Reports & Analytics":"التقارير والتحليلات",
+      "SAP / OT Integration":"تكامل SAP / OT",
+      "Oilfield Integrated Operations Command Center":"مركز القيادة المتكامل لعمليات الحقل النفطي",
+      "Production & Well Operations":"الإنتاج وعمليات الآبار",
+      "Facilities & SCADA Operations":"عمليات المرافق وSCADA",
+      "Asset Integrity & Maintenance":"سلامة الأصول والصيانة",
+      "Well Intervention & Production Recovery":"تدخلات الآبار واستعادة الإنتاج",
+      "HSE & Permit to Work":"السلامة والصحة والبيئة وتصاريح العمل",
+      "Materials, Warehouse & Procurement":"المواد والمخازن والمشتريات",
+      "Contracts & Contractor Performance":"العقود وأداء المقاولين",
+      "OPEX / CAPEX Cost Control":"التحكم بكلف OPEX / CAPEX",
+      "Reports & Management Analytics":"التقارير والتحليلات الإدارية",
+      "SAP / OT Integration Architecture":"معمارية تكامل SAP / OT"
+    }
+  };
+
+  function switchLang(lang){
+    try{
+      localStorage.setItem("sf360-lang2",lang);
+      document.documentElement.lang=lang;
+      document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+      document.querySelectorAll("[data-i18n]").forEach(function(el){
+        const original=el.getAttribute("data-en") || el.textContent.trim();
+        if(!el.getAttribute("data-en")) el.setAttribute("data-en", original);
+        const key=el.getAttribute("data-en");
+        if(dict[lang][key]) el.textContent=dict[lang][key];
+      });
+
+      document.querySelectorAll("aside button span[data-i18n]").forEach(function(el){
+        const key=el.getAttribute("data-en") || el.textContent.trim();
+        if(!el.getAttribute("data-en")) el.setAttribute("data-en",key);
+        if(dict[lang][el.getAttribute("data-en")]) el.textContent=dict[lang][el.getAttribute("data-en")];
+      });
+
+      const map={
+        executive:["Executive Overview","النظرة التنفيذية"],
+        production:["Production & Wells","الإنتاج والآبار"],
+        facilities:["Facilities & SCADA","المرافق وSCADA"],
+        maintenance:["Asset & Maintenance","الأصول والصيانة"],
+        intervention:["Well Intervention","تدخلات الآبار"],
+        hse:["HSE & Permit to Work","السلامة وتصاريح العمل"],
+        materials:["Materials & Procurement","المواد والمشتريات"],
+        contracts:["Contracts & Contractors","العقود والمقاولون"],
+        finance:["Cost Control","التحكم بالكلف"],
+        reports:["Reports & Analytics","التقارير والتحليلات"],
+        integration:["SAP / OT Integration","تكامل SAP / OT"]
+      };
+      const active=document.querySelector(".section.active");
+      if(active && map[active.id]){
+        const pt=document.getElementById("pageTitle");
+        if(pt) pt.textContent=map[active.id][lang==="ar"?1:0];
+      }
+      const badge=document.getElementById("clientBadge");
+      if(badge) badge.textContent=lang==="ar"?"عرض سري مخصص للعميل":"Confidential Client Demonstration";
+
+      const en=document.getElementById("enBtn"), ar=document.getElementById("arBtn");
+      if(en) en.classList.toggle("active",lang==="en");
+      if(ar) ar.classList.toggle("active",lang==="ar");
+    }catch(e){ console.error("Language switch failed",e); }
+  }
+
+  window.switchSmartFieldLang=switchLang;
+  document.addEventListener("DOMContentLoaded",function(){
+    const en=document.getElementById("enBtn"), ar=document.getElementById("arBtn");
+    if(en) en.onclick=function(ev){ev.preventDefault();switchLang("en");};
+    if(ar) ar.onclick=function(ev){ev.preventDefault();switchLang("ar");};
+    switchLang(localStorage.getItem("sf360-lang2")||"en");
+  });
+})();
+</script>
 </body></html>
