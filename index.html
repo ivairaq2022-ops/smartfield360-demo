@@ -12,7 +12,7 @@
 :root{--red:#d71920;--red2:#b31319;--ink:#15171b;--muted:#69707d;--bg:#f3f5f7;--card:#fff;--line:#e5e7eb;--green:#167c46;--amber:#b86a08;--blue:#155eef;--nav:#111318}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
 button{font:inherit}.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{background:var(--nav);color:#fff;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;gap:10px;align-items:center;padding:4px 6px 18px;border-bottom:1px solid #2a2e36}.brand img{width:46px;height:46px;border-radius:10px}.brand b{font-size:16px}.brand small{display:block;color:#9ca3af;font-size:10px;margin-top:3px}.side h6{margin:18px 8px 7px;color:#737b88;font-size:9px;letter-spacing:1px;text-transform:uppercase}.side button{width:100%;border:0;background:transparent;color:#c9ced6;padding:10px 11px;border-radius:8px;text-align:left;font-size:12px;margin:2px 0;cursor:pointer}.side button.active,.side button:hover{background:#242831;color:#fff}.side button.active{box-shadow:inset 3px 0 0 var(--red)}
-.main{min-width:0}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:6}.top h1{font-size:17px;margin:0}.topRight{display:flex;gap:10px;align-items:center}.badge{font-size:10px;border-radius:20px;padding:6px 9px;background:#f7f7f8;border:1px solid var(--line)}.online{color:var(--green);background:#effaf4}.demo{color:#92400e;background:#fff8e8}.avatar{width:31px;height:31px;border-radius:50%;background:#20242b;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px}
+.main{min-width:0}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:6}.top h1{font-size:17px;margin:0}.topRight{display:flex;gap:10px;align-items:center}.badge{font-size:10px;border-radius:20px;padding:6px 9px;background:#f7f7f8;border:1px solid var(--line)}.online{color:var(--green);background:#effaf4}.demo{color:#92400e;background:#fff8e8}.avatar{width:31px;height:31px;border-radius:50%;background:#20242b;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px}.langSwitch{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fff}.langSwitch button{border:0;background:#fff;padding:7px 9px;font-size:10px;cursor:pointer}.langSwitch button.active{background:#17191d;color:#fff}html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .side button,html[dir="rtl"] th,html[dir="rtl"] td{text-align:right}html[dir="rtl"] .side button.active{box-shadow:inset -3px 0 0 var(--red)}
 .content{padding:22px}.section{display:none}.section.active{display:block}.hero{background:linear-gradient(115deg,#14161b,#2a2e35);border-radius:16px;color:#fff;padding:22px 24px;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:16px}.hero h2{margin:0 0 6px;font-size:22px}.hero p{margin:0;color:#c7ccd4;font-size:12px;max-width:780px;line-height:1.5}.heroTag{font-size:10px;border:1px solid #515761;border-radius:9px;padding:8px 10px;white-space:nowrap}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px}.k{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}.v{font-size:25px;font-weight:750;margin:7px 0}.sub{font-size:10px;color:var(--muted)}.deltaUp{color:var(--green)}.deltaDown{color:#b42318}
 .grid2{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;margin-top:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px;overflow:auto}.panel h3{font-size:13px;margin:0 0 12px}.panel h4{font-size:11px;margin:14px 0 7px;color:#444}
@@ -32,71 +32,71 @@ table{width:100%;border-collapse:collapse;font-size:11px;min-width:620px}th,td{p
 <aside class="side">
 <div class="brand"><img src="icons/icon.svg"><div><b>SmartField 360™</b><small>Smart Innovation for Engineering & IT</small></div></div>
 <h6>Command Center</h6>
-<button data-sec="executive" class="active">▦ Executive Overview</button>
-<button data-sec="production">◉ Production & Wells</button>
-<button data-sec="facilities">▣ Facilities & SCADA</button>
+<button data-sec="executive" class="active">▦ <span data-i18n="nav.executive">Executive Overview</span></button>
+<button data-sec="production">◉ <span data-i18n="nav.production">Production & Wells</span></button>
+<button data-sec="facilities">▣ <span data-i18n="nav.facilities">Facilities & SCADA</span></button>
 <h6>Operations</h6>
-<button data-sec="maintenance">⚙ Asset & Maintenance</button>
-<button data-sec="intervention">↗ Well Intervention</button>
-<button data-sec="hse">◇ HSE & Permit to Work</button>
-<button data-sec="materials">▤ Materials & Procurement</button>
-<button data-sec="contracts">⌘ Contracts & Contractors</button>
+<button data-sec="maintenance">⚙ <span data-i18n="nav.maintenance">Asset & Maintenance</span></button>
+<button data-sec="intervention">↗ <span data-i18n="nav.intervention">Well Intervention</span></button>
+<button data-sec="hse">◇ <span data-i18n="nav.hse">HSE & Permit to Work</span></button>
+<button data-sec="materials">▤ <span data-i18n="nav.materials">Materials & Procurement</span></button>
+<button data-sec="contracts">⌘ <span data-i18n="nav.contracts">Contracts & Contractors</span></button>
 <h6>Management</h6>
-<button data-sec="finance">$ Cost Control</button>
-<button data-sec="reports">▥ Reports & Analytics</button>
-<button data-sec="integration">⇄ SAP / OT Integration</button>
+<button data-sec="finance">$ <span data-i18n="nav.finance">Cost Control</span></button>
+<button data-sec="reports">▥ <span data-i18n="nav.reports">Reports & Analytics</span></button>
+<button data-sec="integration">⇄ <span data-i18n="nav.integration">SAP / OT Integration</span></button>
 </aside>
 <div class="main">
-<header class="top"><h1 id="pageTitle">Executive Overview</h1><div class="topRight"><span class="badge demo" id="clientBadge">Confidential Client Demo</span><span class="badge online">● Platform Online</span><div class="avatar">SI</div></div></header>
+<header class="top"><h1 id="pageTitle">Executive Overview</h1><div class="topRight"><div class="langSwitch"><button id="enBtn" class="active">EN</button><button id="arBtn">عربي</button></div><span class="badge demo" id="clientBadge">Confidential Client Demo</span><span class="badge online">● Platform Online</span><div class="avatar">SI</div></div></header>
 <div class="content">
 <section id="executive" class="section active">
-<div class="hero"><div><h2>Oilfield Integrated Operations Command Center</h2><p>Unified operational visibility across wells, production, facilities, maintenance, HSE, materials, contractors and cost performance — designed to integrate with the client's existing SAP and OT/SCADA environment.</p></div><div class="heroTag">ON-PREMISE • SAP-READY • SCADA-READY • API-DRIVEN</div></div>
+<div class="hero"><div><h2 data-i18n="hero.exec">Oilfield Integrated Operations Command Center</h2><p>Unified operational visibility across wells, production, facilities, maintenance, HSE, materials, contractors and cost performance — designed to integrate with the client's existing SAP and OT/SCADA environment.</p></div><div class="heroTag">ON-PREMISE • SAP-READY • SCADA-READY • API-DRIVEN</div></div>
 <div class="kpis" id="execKpis"></div>
 <div class="grid2"><div class="panel"><h3>Production Performance by Well</h3><div id="execWellTable"></div></div><div class="panel"><h3>Operations Action Center</h3><div id="actionCenter"></div></div></div>
 <div class="grid3"><div class="panel"><h3>Production Attainment</h3><div id="attainment"></div></div><div class="panel"><h3>Maintenance Health</h3><div id="maintenanceHealth"></div></div><div class="panel"><h3>HSE Snapshot</h3><div id="hseSnapshot"></div></div></div>
 </section>
 <section id="production" class="section">
-<div class="hero"><div><h2>Production & Well Operations</h2><p>Well status, production targets, water cut, pressure, downtime and intervention visibility from one operational view.</p></div><div class="heroTag">DAILY PRODUCTION REPORTING</div></div>
+<div class="hero"><div><h2 data-i18n="hero.production">Production & Well Operations</h2><p>Well status, production targets, water cut, pressure, downtime and intervention visibility from one operational view.</p></div><div class="heroTag">DAILY PRODUCTION REPORTING</div></div>
 <div class="grid2"><div class="panel"><h3>Digital Oilfield Map</h3><div class="map" id="fieldMap"></div><p class="small">Click a well marker to open the detailed well card.</p></div><div class="panel"><h3>Field KPIs</h3><div id="prodKpis"></div><h4>Production Loss Drivers</h4><div id="lossDrivers"></div></div></div>
 <div class="panel" style="margin-top:14px"><h3>Well Production Register</h3><div id="wellTable"></div></div>
 </section>
 <section id="facilities" class="section">
-<div class="hero"><div><h2>Facilities & SCADA Operations</h2><p>Operational status of CPF, compression, tank farm and utilities with alarm/event visibility. Real deployment would ingest authorized data through the industrial DMZ/historian layer.</p></div><div class="heroTag">OT VISIBILITY WITHOUT DIRECT ERP-TO-PLC CONNECTION</div></div>
+<div class="hero"><div><h2 data-i18n="hero.facilities">Facilities & SCADA Operations</h2><p>Operational status of CPF, compression, tank farm and utilities with alarm/event visibility. Real deployment would ingest authorized data through the industrial DMZ/historian layer.</p></div><div class="heroTag">OT VISIBILITY WITHOUT DIRECT ERP-TO-PLC CONNECTION</div></div>
 <div class="kpis" id="facilityKpis"></div>
 <div class="grid2"><div class="panel"><h3>Facility Status</h3><div id="facilityTable"></div></div><div class="panel"><h3>SCADA Alarm Console</h3><div id="alarmList"></div></div></div>
 <div class="panel" style="margin-top:14px"><h3>Process Overview</h3><div class="flow"><div class="flowCard"><b>Wells</b><p class="small">8 monitored wells</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Gathering</b><p class="small">Flowlines / manifolds</p></div><div class="flowArrow">→</div><div class="flowCard"><b>CPF</b><p class="small">Separation & treatment</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Storage</b><p class="small">Tank farm</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Export</b><p class="small">Metering / dispatch</p></div></div></div>
 </section>
 <section id="maintenance" class="section">
-<div class="hero"><div><h2>Asset Integrity & Maintenance</h2><p>Asset hierarchy, criticality, preventive maintenance and corrective work orders aligned with SAP EAM / PM integration patterns.</p></div><div class="heroTag">ASSET-CENTRIC MAINTENANCE</div></div>
+<div class="hero"><div><h2 data-i18n="hero.maintenance">Asset Integrity & Maintenance</h2><p>Asset hierarchy, criticality, preventive maintenance and corrective work orders aligned with SAP EAM / PM integration patterns.</p></div><div class="heroTag">ASSET-CENTRIC MAINTENANCE</div></div>
 <div class="kpis" id="maintKpis"></div>
 <div class="grid2"><div class="panel"><h3>Critical Asset Register</h3><div id="assetTable"></div></div><div class="panel"><h3>Maintenance Backlog by Priority</h3><div id="backlogBars"></div></div></div>
 <div class="panel" style="margin-top:14px"><h3>Open Work Orders</h3><div id="woTable"></div></div>
 </section>
-<section id="intervention" class="section"><div class="hero"><div><h2>Well Intervention & Production Recovery</h2><p>Prioritize interventions using production loss, downtime, well criticality, work scope and expected production recovery.</p></div><div class="heroTag">PRODUCTION RECOVERY PLANNING</div></div><div class="kpis" id="interventionKpis"></div><div class="grid2"><div class="panel"><h3>Intervention Candidate Ranking</h3><div id="interventionTable"></div></div><div class="panel"><h3>Recovery Opportunity</h3><div id="recoveryBars"></div></div></div><div class="panel" style="margin-top:14px"><h3>Planned Intervention Workflow</h3><div class="flow"><div class="flowCard"><b>Identify Loss</b><p class="small">Downtime / underperformance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Technical Review</b><p class="small">Operations + subsurface + maintenance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Approval</b><p class="small">Scope / budget / HSE</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Execute</b><p class="small">Intervention / repair</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Verify Gain</b><p class="small">Production recovery</p></div></div></div></section>
+<section id="intervention" class="section"><div class="hero"><div><h2 data-i18n="hero.intervention">Well Intervention & Production Recovery</h2><p>Prioritize interventions using production loss, downtime, well criticality, work scope and expected production recovery.</p></div><div class="heroTag">PRODUCTION RECOVERY PLANNING</div></div><div class="kpis" id="interventionKpis"></div><div class="grid2"><div class="panel"><h3>Intervention Candidate Ranking</h3><div id="interventionTable"></div></div><div class="panel"><h3>Recovery Opportunity</h3><div id="recoveryBars"></div></div></div><div class="panel" style="margin-top:14px"><h3>Planned Intervention Workflow</h3><div class="flow"><div class="flowCard"><b>Identify Loss</b><p class="small">Downtime / underperformance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Technical Review</b><p class="small">Operations + subsurface + maintenance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Approval</b><p class="small">Scope / budget / HSE</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Execute</b><p class="small">Intervention / repair</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Verify Gain</b><p class="small">Production recovery</p></div></div></div></section>
 <section id="hse" class="section">
-<div class="hero"><div><h2>HSE & Permit to Work</h2><p>Track incidents, near misses, inspections, corrective actions and permits to work with accountable owners and approval status.</p></div><div class="heroTag">HSE GOVERNANCE & TRACEABILITY</div></div>
+<div class="hero"><div><h2 data-i18n="hero.hse">HSE & Permit to Work</h2><p>Track incidents, near misses, inspections, corrective actions and permits to work with accountable owners and approval status.</p></div><div class="heroTag">HSE GOVERNANCE & TRACEABILITY</div></div>
 <div class="kpis" id="hseKpis"></div>
 <div class="grid2"><div class="panel"><h3>HSE Register</h3><div id="hseTable"></div></div><div class="panel"><h3>Active Permits to Work</h3><div id="ptwTable"></div></div></div>
 </section>
 <section id="materials" class="section">
-<div class="hero"><div><h2>Materials, Warehouse & Procurement</h2><p>Critical spares, reorder points and procurement workflow from operational demand through PR/RFQ/PO — ready for SAP MM integration.</p></div><div class="heroTag">MATERIAL AVAILABILITY & PROCUREMENT CONTROL</div></div>
+<div class="hero"><div><h2 data-i18n="hero.materials">Materials, Warehouse & Procurement</h2><p>Critical spares, reorder points and procurement workflow from operational demand through PR/RFQ/PO — ready for SAP MM integration.</p></div><div class="heroTag">MATERIAL AVAILABILITY & PROCUREMENT CONTROL</div></div>
 <div class="grid2"><div class="panel"><h3>Critical Spare Parts</h3><div id="inventoryTable"></div></div><div class="panel"><h3>Procurement Pipeline</h3><div id="procurementTable"></div></div></div>
 </section>
 <section id="contracts" class="section">
-<div class="hero"><div><h2>Contracts & Contractor Performance</h2><p>Contract value, progress, expiry, SLA and operational contractor performance visibility.</p></div><div class="heroTag">CONTRACT GOVERNANCE</div></div>
+<div class="hero"><div><h2 data-i18n="hero.contracts">Contracts & Contractor Performance</h2><p>Contract value, progress, expiry, SLA and operational contractor performance visibility.</p></div><div class="heroTag">CONTRACT GOVERNANCE</div></div>
 <div class="kpis" id="contractKpis"></div><div class="panel" style="margin-top:14px"><div id="contractTable"></div></div>
 </section>
 <section id="finance" class="section">
-<div class="hero"><div><h2>OPEX / CAPEX Cost Control</h2><p>Budget, actual expenditure, cost centers and variance analysis to connect field operations with enterprise financial control.</p></div><div class="heroTag">COST VISIBILITY BY OPERATIONAL AREA</div></div>
+<div class="hero"><div><h2 data-i18n="hero.finance">OPEX / CAPEX Cost Control</h2><p>Budget, actual expenditure, cost centers and variance analysis to connect field operations with enterprise financial control.</p></div><div class="heroTag">COST VISIBILITY BY OPERATIONAL AREA</div></div>
 <div class="kpis" id="financeKpis"></div>
 <div class="grid2"><div class="panel"><h3>Budget vs Actual</h3><div id="financeTable"></div></div><div class="panel"><h3>Cost Utilization</h3><div id="financeBars"></div></div></div>
 </section>
 <section id="reports" class="section">
-<div class="hero"><div><h2>Reports & Management Analytics</h2><p>Board-ready operational reports and drill-down analysis. Production implementation can generate scheduled PDF/Excel reports and integrate with the client's BI platform.</p></div><div class="heroTag">EXECUTIVE & OPERATIONAL REPORTING</div></div>
+<div class="hero"><div><h2 data-i18n="hero.reports">Reports & Management Analytics</h2><p>Board-ready operational reports and drill-down analysis. Production implementation can generate scheduled PDF/Excel reports and integrate with the client's BI platform.</p></div><div class="heroTag">EXECUTIVE & OPERATIONAL REPORTING</div></div>
 <div class="grid3" id="reportCards"></div>
 </section>
 <section id="integration" class="section">
-<div class="hero"><div><h2>SAP / OT Integration Architecture</h2><p>SmartField 360 is positioned as the oilfield operational experience layer. Existing SAP remains the enterprise system of record while OT data is accessed through controlled industrial integration points.</p></div><div class="heroTag">SECURE BY DESIGN</div></div>
+<div class="hero"><div><h2 data-i18n="hero.integration">SAP / OT Integration Architecture</h2><p>SmartField 360 is positioned as the oilfield operational experience layer. Existing SAP remains the enterprise system of record while OT data is accessed through controlled industrial integration points.</p></div><div class="heroTag">SECURE BY DESIGN</div></div>
 <div class="flow"><div class="flowCard"><b>Field / OT</b><p class="small">PLCs, RTUs, sensors, meters</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SCADA / Historian</b><p class="small">Operational source</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Industrial DMZ</b><p class="small">Gateway / API / broker</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SmartField 360</b><p class="small">Workflows & dashboards</p></div><div class="flowArrow">→</div><div class="flowCard"><b>SAP / ERP</b><p class="small">EAM • MM • FI/CO</p></div></div>
 <div class="grid2"><div class="panel"><h3>Enterprise Integration Scope</h3><div id="integrationTable"></div></div><div class="panel"><h3>Cybersecurity Controls</h3><div class="alarm info"><b>Identity & Access</b><p>AD/LDAP/SSO, MFA, least privilege and role-based access.</p></div><div class="alarm info"><b>IT/OT Segmentation</b><p>No direct SAP-to-PLC connectivity; controlled data exchange through DMZ services.</p></div><div class="alarm info"><b>Auditability</b><p>Centralized logs, approval history and traceable user actions.</p></div><div class="alarm info"><b>Deployment</b><p>On-premise deployment supported for sensitive field environments.</p></div></div></div>
 </section>
@@ -219,6 +219,33 @@ const interventionRows=[
 interventionKpis.innerHTML=kpi("Recoverable Production","5,750","BBL/day opportunity")+kpi("Highest Priority","WF-003","ESP-related loss")+kpi("Open Candidates","3","Technical review queue")+kpi("Potential Uplift","+"+Math.round(5750/target*100)+"%","Vs current field target");
 interventionTable.innerHTML=T(interventionRows,[["well","Well"],["issue","Issue"],["loss","Loss BBL/d"],["priority","Priority"],["scope","Proposed Scope"],["eta","ETA"],["gain","Expected Gain"],["status","Status"]]);
 recoveryBars.innerHTML=interventionRows.map(x=>'<div class="metricRow"><label>'+x.well+'</label><div class="bar '+(x.priority==="Critical"?"":"amber")+'"><i style="width:'+Math.min(100,Math.round(x.gain/2100*100))+'%"></i></div><span class="small">+'+x.gain.toLocaleString()+' BBL/d</span></div>').join("");
+
+const I18N={
+en:{
+"nav.executive":"Executive Overview","nav.production":"Production & Wells","nav.facilities":"Facilities & SCADA","nav.maintenance":"Asset & Maintenance","nav.intervention":"Well Intervention","nav.hse":"HSE & Permit to Work","nav.materials":"Materials & Procurement","nav.contracts":"Contracts & Contractors","nav.finance":"Cost Control","nav.reports":"Reports & Analytics","nav.integration":"SAP / OT Integration",
+"hero.exec":"Oilfield Integrated Operations Command Center","hero.production":"Production & Well Operations","hero.facilities":"Facilities & SCADA Operations","hero.maintenance":"Asset Integrity & Maintenance","hero.intervention":"Well Intervention & Production Recovery","hero.hse":"HSE & Permit to Work","hero.materials":"Materials, Warehouse & Procurement","hero.contracts":"Contracts & Contractor Performance","hero.finance":"OPEX / CAPEX Cost Control","hero.reports":"Reports & Management Analytics","hero.integration":"SAP / OT Integration Architecture",
+"page.executive":"Executive Overview","page.production":"Production & Wells","page.facilities":"Facilities & SCADA","page.maintenance":"Asset & Maintenance","page.intervention":"Well Intervention","page.hse":"HSE & Permit to Work","page.materials":"Materials & Procurement","page.contracts":"Contracts & Contractors","page.finance":"Cost Control","page.reports":"Reports & Analytics","page.integration":"SAP / OT Integration",
+"badge":"Confidential Client Demonstration"
+},
+ar:{
+"nav.executive":"النظرة التنفيذية","nav.production":"الإنتاج والآبار","nav.facilities":"المرافق وSCADA","nav.maintenance":"الأصول والصيانة","nav.intervention":"تدخلات الآبار","nav.hse":"السلامة وتصاريح العمل","nav.materials":"المواد والمشتريات","nav.contracts":"العقود والمقاولون","nav.finance":"التحكم بالكلف","nav.reports":"التقارير والتحليلات","nav.integration":"تكامل SAP / OT",
+"hero.exec":"مركز القيادة المتكامل لعمليات الحقل النفطي","hero.production":"الإنتاج وعمليات الآبار","hero.facilities":"عمليات المرافق وSCADA","hero.maintenance":"سلامة الأصول والصيانة","hero.intervention":"تدخلات الآبار واستعادة الإنتاج","hero.hse":"السلامة والصحة والبيئة وتصاريح العمل","hero.materials":"المواد والمخازن والمشتريات","hero.contracts":"العقود وأداء المقاولين","hero.finance":"التحكم بكلف OPEX / CAPEX","hero.reports":"التقارير والتحليلات الإدارية","hero.integration":"معمارية تكامل SAP / OT",
+"page.executive":"النظرة التنفيذية","page.production":"الإنتاج والآبار","page.facilities":"المرافق وSCADA","page.maintenance":"الأصول والصيانة","page.intervention":"تدخلات الآبار","page.hse":"السلامة وتصاريح العمل","page.materials":"المواد والمشتريات","page.contracts":"العقود والمقاولون","page.finance":"التحكم بالكلف","page.reports":"التقارير والتحليلات","page.integration":"تكامل SAP / OT",
+"badge":"عرض سري مخصص للعميل"
+}};
+let currentLang=localStorage.getItem("sf360-lang")||"en";
+function applyLang(lang){
+ currentLang=lang;localStorage.setItem("sf360-lang",lang);
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(I18N[lang][k])el.textContent=I18N[lang][k]});
+ enBtn.classList.toggle("active",lang==="en");arBtn.classList.toggle("active",lang==="ar");
+ clientBadge.textContent=I18N[lang].badge;
+ const active=document.querySelector(".section.active")?.id||"executive";
+ pageTitle.textContent=I18N[lang]["page."+active]||titles[active];
+}
+enBtn.onclick=()=>applyLang("en");arBtn.onclick=()=>applyLang("ar");
+const oldGo=go;go=function(id){oldGo(id);pageTitle.textContent=I18N[currentLang]["page."+id]||titles[id];};
+applyLang(currentLang);
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 </script>
 </body></html>
