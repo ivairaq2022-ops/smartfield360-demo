@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#111318">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon.svg">
+<script src="client-config.js"></script>
 <title>SmartField 360™ | Oilfield Operations Platform</title>
 <style>
 :root{--red:#d71920;--red2:#b31319;--ink:#15171b;--muted:#69707d;--bg:#f3f5f7;--card:#fff;--line:#e5e7eb;--green:#167c46;--amber:#b86a08;--blue:#155eef;--nav:#111318}
@@ -36,6 +37,7 @@ table{width:100%;border-collapse:collapse;font-size:11px;min-width:620px}th,td{p
 <button data-sec="facilities">▣ Facilities & SCADA</button>
 <h6>Operations</h6>
 <button data-sec="maintenance">⚙ Asset & Maintenance</button>
+<button data-sec="intervention">↗ Well Intervention</button>
 <button data-sec="hse">◇ HSE & Permit to Work</button>
 <button data-sec="materials">▤ Materials & Procurement</button>
 <button data-sec="contracts">⌘ Contracts & Contractors</button>
@@ -45,7 +47,7 @@ table{width:100%;border-collapse:collapse;font-size:11px;min-width:620px}th,td{p
 <button data-sec="integration">⇄ SAP / OT Integration</button>
 </aside>
 <div class="main">
-<header class="top"><h1 id="pageTitle">Executive Overview</h1><div class="topRight"><span class="badge demo">Demo Data</span><span class="badge online">● Platform Online</span><div class="avatar">SI</div></div></header>
+<header class="top"><h1 id="pageTitle">Executive Overview</h1><div class="topRight"><span class="badge demo" id="clientBadge">Confidential Client Demo</span><span class="badge online">● Platform Online</span><div class="avatar">SI</div></div></header>
 <div class="content">
 <section id="executive" class="section active">
 <div class="hero"><div><h2>Oilfield Integrated Operations Command Center</h2><p>Unified operational visibility across wells, production, facilities, maintenance, HSE, materials, contractors and cost performance — designed to integrate with the client's existing SAP and OT/SCADA environment.</p></div><div class="heroTag">ON-PREMISE • SAP-READY • SCADA-READY • API-DRIVEN</div></div>
@@ -70,6 +72,7 @@ table{width:100%;border-collapse:collapse;font-size:11px;min-width:620px}th,td{p
 <div class="grid2"><div class="panel"><h3>Critical Asset Register</h3><div id="assetTable"></div></div><div class="panel"><h3>Maintenance Backlog by Priority</h3><div id="backlogBars"></div></div></div>
 <div class="panel" style="margin-top:14px"><h3>Open Work Orders</h3><div id="woTable"></div></div>
 </section>
+<section id="intervention" class="section"><div class="hero"><div><h2>Well Intervention & Production Recovery</h2><p>Prioritize interventions using production loss, downtime, well criticality, work scope and expected production recovery.</p></div><div class="heroTag">PRODUCTION RECOVERY PLANNING</div></div><div class="kpis" id="interventionKpis"></div><div class="grid2"><div class="panel"><h3>Intervention Candidate Ranking</h3><div id="interventionTable"></div></div><div class="panel"><h3>Recovery Opportunity</h3><div id="recoveryBars"></div></div></div><div class="panel" style="margin-top:14px"><h3>Planned Intervention Workflow</h3><div class="flow"><div class="flowCard"><b>Identify Loss</b><p class="small">Downtime / underperformance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Technical Review</b><p class="small">Operations + subsurface + maintenance</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Approval</b><p class="small">Scope / budget / HSE</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Execute</b><p class="small">Intervention / repair</p></div><div class="flowArrow">→</div><div class="flowCard"><b>Verify Gain</b><p class="small">Production recovery</p></div></div></div></section>
 <section id="hse" class="section">
 <div class="hero"><div><h2>HSE & Permit to Work</h2><p>Track incidents, near misses, inspections, corrective actions and permits to work with accountable owners and approval status.</p></div><div class="heroTag">HSE GOVERNANCE & TRACEABILITY</div></div>
 <div class="kpis" id="hseKpis"></div>
@@ -159,13 +162,13 @@ finance:[
 {category:"Well Intervention",type:"OPEX",budget:145000,actual:171000,cc:"CC-WELL"},
 {category:"Facility Upgrade",type:"CAPEX",budget:500000,actual:210000,cc:"CC-CAPEX"}]
 };
-const titles={executive:"Executive Overview",production:"Production & Wells",facilities:"Facilities & SCADA",maintenance:"Asset & Maintenance",hse:"HSE & Permit to Work",materials:"Materials & Procurement",contracts:"Contracts & Contractors",finance:"Cost Control",reports:"Reports & Analytics",integration:"SAP / OT Integration"};
+const titles={executive:"Executive Overview",production:"Production & Wells",facilities:"Facilities & SCADA",maintenance:"Asset & Maintenance",intervention:"Well Intervention",hse:"HSE & Permit to Work",materials:"Materials & Procurement",contracts:"Contracts & Contractors",finance:"Cost Control",reports:"Reports & Analytics",integration:"SAP / OT Integration"};
 function money(n){return "$"+Number(n).toLocaleString()}
 function T(rows,cols){return '<table><thead><tr>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+cols.map(c=>'<td>'+((c[0]==="status"||c[0]==="priority")?'<span class="status '+String(r[c[0]]).replaceAll(" ","-")+'">'+r[c[0]]+'</span>':r[c[0]])+'</td>').join('')+'</tr>').join('')+'</tbody></table>'}
 function kpi(label,value,sub){return '<div class="card"><div class="k">'+label+'</div><div class="v">'+value+'</div><div class="sub">'+sub+'</div></div>'}
 function go(id){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("[data-sec]").forEach(b=>b.classList.toggle("active",b.dataset.sec===id));pageTitle.textContent=titles[id];window.scrollTo({top:0,behavior:"smooth"})}
 document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>go(b.dataset.sec));
-const mnav=document.getElementById("mobileNav");["executive","production","facilities","maintenance","hse","materials","finance","integration"].forEach(id=>{let b=document.createElement("button");b.dataset.sec=id;b.textContent=titles[id].split(" ")[0];b.onclick=()=>go(id);if(id==="executive")b.classList.add("active");mnav.appendChild(b)});
+const mnav=document.getElementById("mobileNav");["executive","production","facilities","maintenance","intervention","hse","materials","finance","integration"].forEach(id=>{let b=document.createElement("button");b.dataset.sec=id;b.textContent=titles[id].split(" ")[0];b.onclick=()=>go(id);if(id==="executive")b.classList.add("active");mnav.appendChild(b)});
 const oil=D.wells.reduce((a,x)=>a+x.oil,0),target=D.wells.reduce((a,x)=>a+x.target,0),active=D.wells.filter(x=>x.status==="Producing").length,gap=target-oil;
 execKpis.innerHTML=kpi("Today's Oil Production",oil.toLocaleString(),"BBL/day") + kpi("Daily Target",target.toLocaleString(),"BBL/day") + kpi("Producing Wells",active+"/"+D.wells.length,"Field availability") + kpi("Production Gap",gap.toLocaleString(),"BBL/day vs target");
 execWellTable.innerHTML=T(D.wells,[["code","Well"],["status","Status"],["oil","Oil BBL/d"],["target","Target"],["uptime","Uptime %"]]);
@@ -206,6 +209,16 @@ integrationTable.innerHTML=T([
 {source:"AD / Identity",data:"Users, roles, groups",method:"LDAP / SSO / SAML/OIDC",owner:"IT Security"}
 ],[["source","System"],["data","Data Domain"],["method","Integration Pattern"],["owner","Business Owner"]]);
 function wellDetail(code){let w=D.wells.find(x=>x.code===code);modalContent.innerHTML='<h2>'+w.code+' · '+w.name+'</h2><p class="small">Detailed well card — demonstration data</p><div class="kpis">'+kpi("Status",w.status,"Current operational state")+kpi("Oil",w.oil.toLocaleString(),"BBL/day")+kpi("Target",w.target.toLocaleString(),"BBL/day")+kpi("Pressure",w.pressure.toLocaleString(),"PSI")+'</div><div class="grid2"><div class="panel"><h3>Well Performance</h3><div class="metricRow"><label>Target attainment</label><div class="bar green"><i style="width:'+Math.min(100,Math.round(w.oil/w.target*100))+'%"></i></div><span class="small">'+(w.target?Math.round(w.oil/w.target*100):0)+'%</span></div><div class="metricRow"><label>Uptime</label><div class="bar green"><i style="width:'+w.uptime+'%"></i></div><span class="small">'+w.uptime+'%</span></div><p><b>Water cut:</b> '+w.water+'%<br><b>Gas:</b> '+w.gas+' MMSCF/d<br><b>Downtime:</b> '+w.downtime+' h</p></div><div class="panel"><h3>Maintenance</h3><p><b>Last maintenance:</b> '+w.last+'<br><b>Next PM:</b> '+w.next+'</p><p class="small">In production, this panel can display related SAP work orders, notifications, BOM/spares and intervention history.</p></div></div>';modal.classList.add("show")}
+const CFG=window.CLIENT_CONFIG||{};
+document.getElementById("clientBadge").textContent=CFG.confidentiality||"Confidential Client Demonstration";
+document.title="SmartField 360™ | "+(CFG.clientName||"Client Oilfield");
+const interventionRows=[
+{well:"WF-003",issue:"ESP Trip",loss:1900,priority:"Critical",scope:"ESP recovery / replacement",eta:"24-48 h",gain:1900,status:"Ready for Review"},
+{well:"WF-004",issue:"Planned Maintenance",loss:2100,priority:"High",scope:"Complete maintenance & restart",eta:"8-12 h",gain:2100,status:"In Progress"},
+{well:"WF-007",issue:"Shut-in Review",loss:1750,priority:"Medium",scope:"Integrity / restart assessment",eta:"TBD",gain:1750,status:"Engineering Review"}];
+interventionKpis.innerHTML=kpi("Recoverable Production","5,750","BBL/day opportunity")+kpi("Highest Priority","WF-003","ESP-related loss")+kpi("Open Candidates","3","Technical review queue")+kpi("Potential Uplift","+"+Math.round(5750/target*100)+"%","Vs current field target");
+interventionTable.innerHTML=T(interventionRows,[["well","Well"],["issue","Issue"],["loss","Loss BBL/d"],["priority","Priority"],["scope","Proposed Scope"],["eta","ETA"],["gain","Expected Gain"],["status","Status"]]);
+recoveryBars.innerHTML=interventionRows.map(x=>'<div class="metricRow"><label>'+x.well+'</label><div class="bar '+(x.priority==="Critical"?"":"amber")+'"><i style="width:'+Math.min(100,Math.round(x.gain/2100*100))+'%"></i></div><span class="small">+'+x.gain.toLocaleString()+' BBL/d</span></div>').join("");
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 </script>
 </body></html>
