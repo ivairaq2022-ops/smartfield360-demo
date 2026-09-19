@@ -1,4 +1,4 @@
-const CACHE='smartfield360-v8';
+const CACHE='smartfield360-v9';
 const ASSETS=['./','./index.html','./en.html','./ar.html','./manifest.json','./client-config.js','./icons/icon.svg'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim()});
